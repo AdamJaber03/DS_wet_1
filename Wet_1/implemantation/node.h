@@ -5,12 +5,19 @@
 template <typename T, typename S>
 class node{
 public:
-    node();
-    virtual ~node();
+    virtual ~node() = default;
     node(S & key, T & value) : key(key), value(value), height(0) {};
     void setParent(node * parent);
     void setRight(node * right);
     void setLeft(node * left);
+    const S & getKey();
+    const node * getLeft();
+    const node * getRight();
+    node * getParent();
+    int getHeight();
+    void updateHeight();
+    int getBf();
+
 private:
     S & key;
     T & value;
@@ -18,7 +25,7 @@ private:
     node * left;
     node * right;
     node * parent;
-    void updateHeight();
 };
+
 
 #endif //DS_WET_1_NODE_H

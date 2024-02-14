@@ -13,4 +13,6 @@ add_executable(DS_wet_1
         Wet_1/Scripts/Olympicsa1.h
         Wet_1/Scripts/wet1util.h
         Wet_1/Tests/test1.in
-        Wet_1/Tests/test1.out)
+        Wet_1/Tests/test1.out
+        Wet_1/implemantation/avl.cpp
+        Wet_1/implemantation/node.cpp)
