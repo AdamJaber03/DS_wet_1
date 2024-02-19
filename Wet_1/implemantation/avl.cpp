@@ -28,6 +28,8 @@ StatusType avl<T, S>::insert(T &key, S &value) {
     }
     fixTree(newNode);
     size++;
+    maxKey = findMax();
+    minKey = findMin();
 }
 
 template<typename T, typename S>
@@ -219,6 +221,8 @@ StatusType avl<T, S>::remove(T &key) {
     }
     fixTree(startfix);
     size--;
+    maxKey = findMax();
+    minKey = findMin();
 }
 
 template<typename T, typename S>
@@ -237,4 +241,32 @@ void avl<T, S>::destructorAux(node<T, S> *cur) {
     destructorAux(cur->getLeft());
     destructorAux(cur->getRight());
     delete cur;
+}
+
+template<typename T, typename S>
+T avl<T, S>::findMax() {
+    node<T, S> *cur = root;
+    while (cur->getRight()){
+        cur = cur->getRight();
+    }
+    return cur;
+}
+
+template<typename T, typename S>
+T avl<T, S>::findMin() {
+    node<T, S> *cur = root;
+    while (cur->getLeft()){
+        cur = cur->getLeft();
+    }
+    return cur;
+}
+
+template<typename T, typename S>
+T avl<T, S>::getMax() {
+    return maxKey;
+}
+
+template<typename T, typename S>
+T avl<T, S>::getMin() {
+    return minKey;
 }

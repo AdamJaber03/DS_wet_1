@@ -73,7 +73,10 @@ output_t<int> Olympics::get_medals(int countryId){
 }
 
 output_t<int> Olympics::get_team_strength(int teamId){
-	return 0;
+    if (teamId <= 0) return output_t<int>(StatusType::INVALID_INPUT);
+    Team *team = teams.find(teamId);
+    if(!team) return output_t<int>(StatusType::FAILURE);
+    return output_t<int>(team->getStrength());
 }
 
 StatusType Olympics::unite_teams(int teamId1,int teamId2){

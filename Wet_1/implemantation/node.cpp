@@ -20,7 +20,7 @@ template<typename T, typename S>
 void node<T, S>::updateHeight() {
     int lheight = left->height ? left: -1;
     int rheight = right->height ? right: -1;
-    height = max(lheight, rheight) + 1;
+    height = fmax(lheight, rheight) + 1;
 }
 
 template<typename T, typename S>

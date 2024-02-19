@@ -15,11 +15,17 @@ public:
     StatusType remove(T & key);
     S * find(T & key);
     void changeUnique();
+    T getMax();
+    T getMin();
 
 private:
     node<T, S> * root;
     int size;
     bool unique = true;
+    int maxKey;
+    int minKey;
+    T findMax();
+    T findMin();
     node<T, S> * findAux(T & key);
     void fixTree(node<T, S> * start);
     void rotateRR(node<T, S> * toFix);
@@ -29,8 +35,5 @@ private:
     void destructorAux(node<T, S> * cur);
 
 };
-
-
-
 
 #endif //DS_WET_1_AVL_H
