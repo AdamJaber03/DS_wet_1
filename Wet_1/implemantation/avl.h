@@ -11,12 +11,10 @@ class avl{
 public:
     avl();
     virtual ~avl();
-    StatusType push(S & key, T &value);
+    StatusType insert(S & key, T &value);
     StatusType remove(S & key);
     T * find(S & key);
     void changeUnique();
-    avl(avl& toCopy);
-    avl& operator=(const avl& toCopy);
 
 private:
     node<T, S> * root;
@@ -29,7 +27,6 @@ private:
     void rotateRL(node<T, S> * toFix);
     void rotateLR(node<T, S> * toFix);
     void destructorAux(node<T, S> * cur);
-    void copyAux(node<T, S> * cur, node<T, S> * curCopy);
 
 };
 

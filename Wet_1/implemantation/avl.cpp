@@ -4,7 +4,7 @@ template<typename T, typename S>
 avl<T, S>::avl(): size(0), root(nullptr) {}
 
 template<typename T, typename S>
-StatusType avl<T, S>::push(S &key, T &value) {
+StatusType avl<T, S>::insert(S &key, T &value) {
     node<T, S> * newNode = new node<T, S>(key, value);
     if (newNode == nullptr){
         return StatusType::ALLOCATION_ERROR;
@@ -153,28 +153,36 @@ StatusType avl<T, S>::remove(S &key) {
         return StatusType::FAILURE;
     }
     bool pside = toRemove->getParent()->getKey() > key;
-
+    node<T, S> * parent = toRemove->getParent(), lson = toRemove->getLeft(), rson = toRemove->getRight();
+    try{
+        delete toRemove;
+    } catch (std::bad_alloc& e){
+        return StatusType::ALLOCATION_ERROR;
+    }
+    node<T, S> * startfix;
     // if node has only one son connect him to parent
-    if(!toRemove->getLeft() && toRemove->getRight()){
+    if(!lson && rson){
         if (pside){
-            toRemove->getParent()->setLeft(toRemove->getRight());
+            parent->setLeft(rson);
         } else{
-            toRemove->getParent()->setRight(toRemove->getRight());
+            parent->setRight(rson);
         }
-        toRemove->getRight()->setParent(toRemove->getParent());
-    } else if(toRemove->getLeft() && !toRemove->getRight()){
+        rson->setParent(parent);
+        startfix = parent;
+    } else if(lson && !rson){
         if (pside){
-            toRemove->getParent()->setLeft(toRemove->getLeft());
+            parent->setLeft(lson);
         } else{
-            toRemove->getParent()->setRight(toRemove->getLeft());
+            parent->setRight(lson);
         }
-        toRemove->getLeft()->setParent(toRemove->getParent());
+        lson->setParent(parent);
+        startfix = parent;
     }
     // if node has two sons replace it with smallest node in right subtree
-    else if(toRemove->getLeft() && toRemove->getRight()){
+    else if(lson && rson){
         //find smallest
         bool first = true;
-        node<T, S> * curSmall = toRemove->getRight();
+        node<T, S> * curSmall = rson;
         while (curSmall->getLeft()){
             first = false;
             curSmall = curSmall->getLeft();
@@ -185,36 +193,31 @@ StatusType avl<T, S>::remove(S &key) {
         } else{
             curSmall->getParent()->setLeft(curSmall->getRight());
         }
+        startfix = curSmall->getParent();
         if (curSmall->getRight()) {
             curSmall->getRight()->setParent(curSmall->getParent());
         }
         // connect smallest to toRemove parent
-        curSmall->setParent(toRemove->getParent());
+        curSmall->setParent(parent);
         if(pside){
-            toRemove->getParent()->setLeft(curSmall);
+            parent->setLeft(curSmall);
         } else{
-            toRemove->getParent()->setRight(curSmall);
+            parent->setRight(curSmall);
         }
         // connect smallest to toRemove sons
-        curSmall->setLeft(toRemove->setLeft());
-        curSmall->setRight(toRemove->setRight());
+        curSmall->setLeft(lson);
+        curSmall->setRight(rson);
         curSmall->getLeft()->setParent(curSmall);
         curSmall->getRight()->setParent(curSmall);
     } else{
         if (pside){
-            toRemove->getParent()->setLeft(nullptr);
+            parent->setLeft(nullptr);
         }else{
-            toRemove->getParent()->setRight(nullptr);
+            parent->setRight(nullptr);
         }
+        startfix = parent;
     }
-    node<T, S> * startFix = toRemove->getParent();
-    try{
-        delete toRemove;
-    } catch (std::bad_alloc& e){
-        *this = backupTree;
-        return StatusType::ALLOCATION_ERROR;
-    }
-    fixTree(startFix);
+    fixTree(startfix);
     size--;
 }
 
@@ -234,17 +237,4 @@ void avl<T, S>::destructorAux(node<T, S> *cur) {
     destructorAux(cur->getLeft());
     destructorAux(cur->getRight());
     delete cur;
-}
-
-template<typename T, typename S>
-avl<T, S>::avl(avl &toCopy): size(toCopy.size), unique(toCopy.unique){
-    if (!toCopy.root) return;
-    // TODO- deal with allocation error
-    root = new node<T, S>(toCopy.root->getKey(), toCopy.root.getValue);
-    copyAux(root, toCopy.root);
-}
-
-template<typename T, typename S>
-void avl<T, S>::copyAux(node<T, S> *cur, node<T, S> *curCopy) {
-
 }

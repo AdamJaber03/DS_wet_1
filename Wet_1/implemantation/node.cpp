@@ -18,7 +18,9 @@ void node<T, S>::setLeft(node *left) {
 
 template<typename T, typename S>
 void node<T, S>::updateHeight() {
-    height = max(left->height, right->height) + 1;
+    int lheight = left->height ? left: -1;
+    int rheight = right->height ? right: -1;
+    height = max(lheight, rheight) + 1;
 }
 
 template<typename T, typename S>
