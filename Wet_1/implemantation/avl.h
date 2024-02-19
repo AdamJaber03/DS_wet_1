@@ -256,6 +256,7 @@ StatusType avl<T, S>::remove(T &key) {
     size--;
     maxKey = findMax();
     minKey = findMin();
+    return StatusType::SUCCESS;
 }
 
 template<typename T, typename S>

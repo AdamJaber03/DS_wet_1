@@ -37,15 +37,49 @@ StatusType Olympics::remove_country(int countryId){
 }
 
 StatusType Olympics::add_team(int teamId,int countryId,Sport sport){
-	return StatusType::FAILURE;
+	Team * team_p = nullptr;
+    if(countryId <= 0 || teamId <= 0){
+        return StatusType::INVALID_INPUT;
+    }
+    Country * country_p = countries.find(countryId);
+    Team * team = teams.find(teamId);
+    if(team->getID() == teamId && country_p->getId() != countryId) return StatusType::FAILURE;
+    try{
+        team_p = new Team(teamId, &countryId, sport);
+    }
+    catch(std::bad_alloc &e){
+        return StatusType::ALLOCATION_ERROR;
+    }
+    Team toAdd = *team_p;
+    return teams.insert(teamId, toAdd);
 }
 
 StatusType Olympics::remove_team(int teamId){
-	return StatusType::FAILURE;
+	if(teamId <= 0){
+        return StatusType::INVALID_INPUT;
+    }
+    Team * teamToRemove = teams.find(teamId);
+    if(!teamToRemove || teamToRemove->getNumContestants() > 0){
+        return StatusType::FAILURE;
+    }
+    return teams.remove(teamId);
 }
 	
-StatusType Olympics::add_contestant(int contestantId ,int countryId,Sport sport,int strength){
-	return StatusType::FAILURE;
+StatusType Olympics::add_contestant(int contestantId ,int countryId,Sport sport,int strength){ 
+	if(contestantId <= 0 || countryId <= 0 ||strength < 0) return StatusType::INVALID_INPUT;
+    Country * country = countries.find(countryId);
+    Contestant * contestant = contestants.find(countryId);
+    if(contestant || !country) return StatusType::FAILURE;
+    //continue
+    Contestant * contestant_p = nullptr;
+    try{
+        contestant_p = new Contestant(contestantId, &countryId, sport, strength);
+    }
+    catch(std::bad_alloc &e){
+        return StatusType::ALLOCATION_ERROR;
+    }
+    Contestant addContestant = *contestant_p;
+    return contestants.insert(countryId, addContestant);
 }
 	
 StatusType Olympics::remove_contestant(int contestantId){
@@ -65,11 +99,17 @@ StatusType Olympics::update_contestant_strength(int contestantId ,int change){
 }
 
 output_t<int> Olympics::get_strength(int contestantId){
-	return 0;
+	if(contestantId < 0) return StatusType::INVALID_INPUT;
+    Contestant * contestant = contestants.find(contestantId);
+    if(!contestant) return StatusType::FAILURE;
+    return contestant->getStrength();
 }
 
 output_t<int> Olympics::get_medals(int countryId){
-	return 0;
+	if(countryId <= 0) return output_t<int>(StatusType::INVALID_INPUT);
+    Country * country = countries.find(countryId);
+    if(!country) return output_t<int>(StatusType::FAILURE);
+    return output_t<int>(country->getMedals());
 }
 
 output_t<int> Olympics::get_team_strength(int teamId){

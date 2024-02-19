@@ -7,3 +7,6 @@ int Team::getStrength() {
 }
 
 
+int *Team::getCountry() {
+    return country;
+}
