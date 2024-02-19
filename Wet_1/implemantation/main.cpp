@@ -1,7 +1,7 @@
 //
 // Created by amir on 19/02/2024.
 //
-#include "../../avl.h"
+#include "avl.h"
 #include <cassert>
 int main(){
     avl<int, int> intintTree;
