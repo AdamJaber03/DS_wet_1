@@ -52,3 +52,8 @@ template<typename T, typename S>
 int node<T, S>::getBf() {
     return left->getHeight() - right->getHeight();
 }
+
+template<typename T, typename S>
+S &node<T, S>::getValue() {
+    return value;
+}

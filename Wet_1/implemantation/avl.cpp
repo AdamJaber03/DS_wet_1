@@ -4,9 +4,9 @@ template<typename T, typename S>
 avl<T, S>::avl(): size(0), root(nullptr) {}
 
 template<typename T, typename S>
-StatusType avl<T, S>::insert(S &key, T &value) {
+StatusType avl<T, S>::insert(T &key, S &value) {
     node<T, S> * newNode = new node<T, S>(key, value);
-    if (newNode == nullptr){
+    if (newNode == nullptr){    //Todo - check if legal
         return StatusType::ALLOCATION_ERROR;
     }
     if (!root){
@@ -31,7 +31,7 @@ StatusType avl<T, S>::insert(S &key, T &value) {
 }
 
 template<typename T, typename S>
-T *avl<T, S>::findAux(S &key) {
+node<T, S> *avl<T, S>::findAux(T &key) {
     node<T, S> * cur = root, parent = nullptr;
     while (cur){
         if (cur->getKey() == key){
@@ -49,12 +49,12 @@ T *avl<T, S>::findAux(S &key) {
 }
 
 template<typename T, typename S>
-T *avl<T, S>::find(S &key) {
+S *avl<T, S>::find(T &key) {
     node<T, S> * parent = findAux(key);
     if (parent->getLeft()->getKey() == key){
-        return parent->getLeft();
+        return &parent->getLeft()->getValue();
     } else if(parent->getRight()->getKey() == key){
-        return parent->getRight();
+        return &parent->getRight()->getValue();
     }
     return nullptr;
 }
@@ -146,7 +146,7 @@ void avl<T, S>::fixTree(node<T, S> *start) {
 
 
 template<typename T, typename S>
-StatusType avl<T, S>::remove(S &key) {
+StatusType avl<T, S>::remove(T &key) {
     avl<T, S> backupTree = avl<T, S>(*this);
     node<T, S> * toRemove = find(key);
     if (!toRemove){

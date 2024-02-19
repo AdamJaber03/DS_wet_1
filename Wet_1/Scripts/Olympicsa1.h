@@ -15,13 +15,15 @@
 #ifndef STREAMINGDBA1_H_
 #define STREAMINGDBA1_H_
 
+#include "country.h"
+#include "avl.h"
+#include "node.h"
 #include "wet1util.h"
 
 class Olympics {
 private:
-	//
-	// Here you may add anything you want
-	//
+	avl<int, Country> countries;
+
 	
 public:
 	// <DO-NOT-MODIFY> {

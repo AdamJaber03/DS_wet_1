@@ -8,14 +8,22 @@
 class Country{
 public:
     Country(int id, int medals): id(id), medals(medals), contestants(0), teams(0){};
-    getId();
-    getMedals;
-    addMedal();
+    ~Country() = default;
+    int getId();
+    int getMedals();
+    void addMedal();
+    int getTeams();
+    int getContestants();
+    void setTeams(int teams);
+    void setContestants(int contestants);
+
 private:
     int id;
     int medals;
     int contestants;
     int teams;
 };
+
+
 
 #endif //DS_WET_1_COUNTRY_H

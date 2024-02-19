@@ -11,11 +11,29 @@ Olympics::~Olympics(){
 }
 	
 StatusType Olympics::add_country(int countryId, int medals){
-	return StatusType::FAILURE;
+    Country * country_p = nullptr;
+    if (countryId <= 0 || medals < 0){
+        return StatusType::INVALID_INPUT;
+    }
+	try{
+        country_p = new Country(countryId, medals);
+    }
+    catch(std::bad_alloc& e){
+        return StatusType::ALLOCATION_ERROR;
+    }
+    Country country = *country_p;
+    return countries.insert(countryId, country);
 }
 	
 StatusType Olympics::remove_country(int countryId){
-	return StatusType::FAILURE;
+	if(countryId <= 0){
+        return StatusType::INVALID_INPUT;
+    }
+    Country * toRemove = countries.find(countryId);
+    if(toRemove->getTeams() != 0 && toRemove->getContestants() != 0){
+        return StatusType::FAILURE;
+    }
+    return countries.remove(countryId);
 }
 
 StatusType Olympics::add_team(int teamId,int countryId,Sport sport){
