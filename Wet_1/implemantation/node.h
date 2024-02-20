@@ -12,9 +12,10 @@ public:
     void setParent(node * parent);
     void setRight(node * right);
     void setLeft(node * left);
-    const T getKey();
-    void setKey(T & key);
-    void setValue(S & value);
+    T & getKey();
+    void setKey(T key);
+    void setValue(S value);
+
     node * getLeft();
     node * getRight();
     node * getParent();
@@ -33,12 +34,12 @@ private:
 };
 
 template<typename T, typename S>
-void node<T, S>::setValue(S &value) {
+void node<T, S>::setValue(S value) {
     this->value = value;
 }
 
 template<typename T, typename S>
-void node<T, S>::setKey(T &key) {
+void node<T, S>::setKey(T key) {
     this->key = key;
 }
 
@@ -69,7 +70,7 @@ void node<T, S>::updateHeight() {
 }
 
 template<typename T, typename S>
-const T node<T, S>::getKey() {
+T &node<T, S>::getKey() {
     return key;
 }
 
