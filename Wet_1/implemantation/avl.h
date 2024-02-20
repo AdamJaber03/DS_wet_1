@@ -14,10 +14,11 @@ public:
     virtual ~avl();
     StatusType insert(T & key, S &value);
     StatusType remove(T & key);
-    S * find(T & key);
+    S * find(T * key);
     void changeUnique();
-    T getMax();
-    T getMin();
+    T & getMax();
+    T & getMin();
+    int getSize();
 
 private:
     node<T, S> * root;
@@ -39,6 +40,11 @@ private:
 };
 
 template<typename T, typename S>
+int avl<T, S>::getSize() {
+    return size;
+}
+
+template<typename T, typename S>
 void avl<T, S>::printTreeAux(node<T, S>* cur) {
     if (!cur) return;
     printTreeAux(cur->getLeft());
@@ -56,7 +62,7 @@ void avl<T, S>::printTree() {
 
 template<typename T, typename S>
 StatusType avl<T, S>::insert(T &key, S &value) {
-    node<T, S> * newNode = new node<T, S>(key, value);
+    node<T, S> * newNode = new node<T, S>(static_cast<int *>(key), value);
     std::cout << "newNode value: " << newNode->getValue() << std::endl;
     if (!newNode){    //Todo - check if legal
         return StatusType::ALLOCATION_ERROR;
@@ -399,12 +405,12 @@ T avl<T, S>::findMin() {
 }
 
 template<typename T, typename S>
-T avl<T, S>::getMax() {
+T & avl<T, S>::getMax() {
     return maxKey;
 }
 
 template<typename T, typename S>
-T avl<T, S>::getMin() {
+T & avl<T, S>::getMin() {
     return minKey;
 }
 

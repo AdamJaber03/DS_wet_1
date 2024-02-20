@@ -18,6 +18,8 @@ public:
     int getNumTeams();
     void setStrength(int updateStrength);
     void addTeam();
+    int * getCountry();
+
 private:
     int contestantID;
     int * country;

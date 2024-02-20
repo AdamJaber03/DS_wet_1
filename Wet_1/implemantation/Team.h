@@ -18,6 +18,12 @@ public:
     int getStrength();
     int get_austerity();
     int * getCountry();
+    avl<int, Contestant*> & getS1();
+    avl<int, Contestant*> & getS2();
+    avl<int, Contestant*> & getS3();
+    avl<int, int> & getSt1();
+    avl<int, int> & getSt2();
+    avl<int, int> & getSt3();
 
 private:
     int teamId;

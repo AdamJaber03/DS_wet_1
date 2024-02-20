@@ -30,3 +30,7 @@ void Contestant::setStrength(int updateStrength) {
 void Contestant::addTeam() {
     numTeams++;
 }
+
+int *Contestant::getCountry() {
+    return country;
+}

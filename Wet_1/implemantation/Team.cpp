@@ -10,3 +10,27 @@ int Team::getStrength() {
 int *Team::getCountry() {
     return country;
 }
+
+avl<int, Contestant *> &Team::getS1() {
+    return s1;
+}
+
+avl<int, Contestant *> &Team::getS2() {
+    return s2;
+}
+
+avl<int, Contestant *> &Team::getS3() {
+    return s3;
+}
+
+avl<int, int> &Team::getSt1() {
+    return st1;
+}
+
+avl<int, int> &Team::getSt2() {
+    return st2;
+}
+
+avl<int, int> &Team::getSt3() {
+    return st3;
+}
