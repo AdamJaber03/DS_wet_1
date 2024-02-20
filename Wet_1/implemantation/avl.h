@@ -18,6 +18,7 @@ public:
     void changeUnique();
     T getMax();
     T getMin();
+    int getSize();
 
 private:
     node<T, S> * root;
@@ -39,6 +40,11 @@ private:
 };
 
 template<typename T, typename S>
+int avl<T, S>::getSize() {
+    return size;
+}
+
+template<typename T, typename S>
 void avl<T, S>::printTreeAux(node<T, S>* cur) {
     if (!cur) return;
     printTreeAux(cur->getLeft());
@@ -57,7 +63,6 @@ void avl<T, S>::printTree() {
 template<typename T, typename S>
 StatusType avl<T, S>::insert(T &key, S &value) {
     node<T, S> * newNode = new node<T, S>(key, value);
-    std::cout << "newNode value: " << newNode->getValue() << std::endl;
     if (!newNode){    //Todo - check if legal
         return StatusType::ALLOCATION_ERROR;
     }
@@ -83,9 +88,7 @@ StatusType avl<T, S>::insert(T &key, S &value) {
         parent = parent->getParent();
     }
     printTree();
-    std::cout << "fix reached" << std::endl;
     fixTree(newNode);
-    std::cout << "fixed" << std::endl;
 
     size++;
     maxKey = findMax();
@@ -114,14 +117,9 @@ node<T, S> *avl<T, S>::findAux(T &key) {
 
 template<typename T, typename S>
 S *avl<T, S>::find(T &key) {
-    std::cout << "key to find: " << key << std::endl;
     node<T, S> * parent = findAux(key);
-    std::cout << "parent " << parent << std::endl;
     if (!parent && root) return &root->getValue();
     if (!parent) return nullptr;
-    std::cout << "parent " << parent->getKey() << std::endl;
-    if (parent->getLeft()) std::cout << "parent " << parent->getLeft()->getKey() << std::endl;
-    if (parent->getRight()) std::cout << "parent " << parent->getRight()->getKey() << std::endl;
     if (parent->getLeft() && parent->getLeft()->getKey() == key){
         return &parent->getLeft()->getValue();
     } else if(parent->getRight() && parent->getRight()->getKey() == key){
@@ -203,7 +201,6 @@ void avl<T, S>::fixTree(node<T, S> *start) {
         printTree();
         cur->updateHeight();
         int bf = cur->getBf();
-        std::cout << "bf: " << bf << std::endl;
 
         if (abs(bf) < 2){
             cur = cur->getParent();

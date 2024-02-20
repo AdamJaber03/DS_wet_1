@@ -30,8 +30,8 @@ private:
     int *country;
     Sport sport;
     int numContestants;
-    avl<int, Contestant*> s1, s2, s3;
-    avl<int, int> st1, st2, st3;
+    avl<int, int> s1, s2, s3;
+    avl<int, int> st1, st2, st3;    //strength keys id values
 
 };
 

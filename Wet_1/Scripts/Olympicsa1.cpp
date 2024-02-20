@@ -56,15 +56,15 @@ StatusType Olympics::add_team(int teamId,int countryId,Sport sport){
 
 StatusType Olympics::remove_team(int teamId){
 	if(teamId <= 0) return StatusType::INVALID_INPUT;
-        Team * teamToRemove = teams.find(&teamId);
+        Team * teamToRemove = teams.find(teamId);
     if(!teamToRemove || teamToRemove->getNumContestants() > 0) return StatusType::FAILURE;
     return teams.remove(teamId);
 }
 	
 StatusType Olympics::add_contestant(int contestantId ,int countryId,Sport sport,int strength){
 	if(contestantId <= 0 || countryId <= 0 ||strength < 0) return StatusType::INVALID_INPUT;
-    Country * country = countries.find(&countryId);
-    Contestant * contestant = contestants.find(&countryId);
+    Country * country = countries.find(countryId);
+    Contestant * contestant = contestants.find(countryId);
     if(contestant || !country) return StatusType::FAILURE;
     Contestant * contestant_p = nullptr;
     try{
@@ -87,8 +87,8 @@ StatusType Olympics::remove_contestant(int contestantId){
 	
 StatusType Olympics::add_contestant_to_team(int teamId,int contestantId){
 	if(teamId <= 0 || contestantId <= 0) return StatusType::INVALID_INPUT;
-    Contestant * add = contestants.find(&contestantId);
-    Team * team = teams.find(&teamId);
+    Contestant * add = contestants.find(contestantId);
+    Team * team = teams.find(teamId);
     if(add || team->getSport() != add->getSport() || team->getCountry() != add->getCountry()) return StatusType::FAILURE;
     int strength = add->getStrength();
     StatusType status = StatusType::SUCCESS;
@@ -110,15 +110,19 @@ StatusType Olympics::add_contestant_to_team(int teamId,int contestantId){
         status = team->getSt3().insert(strength, *add->getCountry());
         if(status != StatusType::SUCCESS) return status;
     }
-    if(contestants.getSize() < team->getS1().getSize()*3){ //if first tree not good
+
+    int numPerS = ((team->getNumContestants()  - 1) / 3) + 1;
+    if(numPerS  < team->getS1().getSize()){ //if first tree not good
         int idMax = team->getS1().getMax();
-        Contestant ** change = team->getS1().find(&idMax);
-        
+        Contestant ** change = team->getS1().find(idMax);
+        status = team->getS1().remove((idMax));
+        if(status != StatusType::SUCCESS) return status;
+        team->getSt1().remove()
     }
-    if(contestants.getSize() < team->getS2().getSize()*3){ //if second tree not good
+    if(numPerS < team->getS2().getSize()){ //if second tree not good
 
     }
-    if(contestants.getSize() < team->getS1().getSize()*3){ //if third tree not good
+    if(numPerS < team->getS1().getSize()){ //if third tree not good
 
     }
     return StatusType::FAILURE;

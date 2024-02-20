@@ -8,7 +8,7 @@ template <typename T, typename S>
 class node{
 public:
     virtual ~node() = default;
-    node(T * key, S * value) : key(key), value(value), height(0), left(nullptr), right(nullptr), parent(nullptr) {};
+    node(T key, S value) : key(key), value(value), height(0), left(nullptr), right(nullptr), parent(nullptr) {};
     void setParent(node * parent);
     void setRight(node * right);
     void setLeft(node * left);
@@ -22,7 +22,7 @@ public:
     int getHeight();
     void updateHeight();
     int getBf();
-    S getValue();
+    S& getValue();
 
 private:
     T key;
@@ -102,7 +102,7 @@ int node<T, S>::getBf() {
 }
 
 template<typename T, typename S>
-S node<T, S>::getValue() {
+S& node<T, S>::getValue() {
     return value;
 }
 
