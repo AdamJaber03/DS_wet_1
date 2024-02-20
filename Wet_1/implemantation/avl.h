@@ -231,6 +231,7 @@ template<typename T, typename S>
 StatusType avl<T, S>::remove(T &key) {
     node<T, S> * parent = findAux(key);
     node<T, S> * toRemove = nullptr;
+    node<T, S> * startfix = nullptr;
     if (!parent){
         if (!root) return StatusType::FAILURE;  //TODO - fix
         toRemove = root;
@@ -251,15 +252,16 @@ StatusType avl<T, S>::remove(T &key) {
             return StatusType::ALLOCATION_ERROR;
         }
         if (isRoot){
-            root == nullptr;
-            return StatusType::SUCCESS;
+            root = nullptr;
+        }else{
+            bool pside = parent->getKey() > key;
+            if (pside){
+                parent->setLeft(nullptr);
+            } else{
+                parent->setRight(nullptr);
+            }
         }
-        bool pside = parent->getKey() > key;
-        if (pside){
-            parent->setLeft(nullptr);
-        } else{
-            parent->setRight(nullptr);
-        }
+        startfix = parent;
     }
     else if ((rson && !lson) || (!rson && lson)){
         try{
@@ -280,6 +282,7 @@ StatusType avl<T, S>::remove(T &key) {
             }
             replacement->setParent(parent);
         }
+        startfix = parent;
     }
     else{
         bool first = true;
@@ -288,72 +291,27 @@ StatusType avl<T, S>::remove(T &key) {
             first = false;
             curSmall = curSmall->getLeft();
         }
-        T * tempKey = & toRemove->getKey();
-        S * tempValue = & toRemove->getValue();
-    }
-
-
-
-    try{
-        delete toRemove;
-    } catch (std::bad_alloc& e){
-        return StatusType::ALLOCATION_ERROR;
-    }
-    node<T, S> * startfix;
-    // if node has only one son connect him to parent
-    if(!lson && rson){
-        if (pside){
-            parent->setLeft(rson);
-        } else{
-            parent->setRight(rson);
+        startfix = curSmall->getParent();
+        T tempKey = curSmall->getKey();
+        S tempValue = curSmall->getValue();
+//        StatusType status = remove(curSmall->getKey());
+//        if (status == StatusType::ALLOCATION_ERROR){
+//            return StatusType::ALLOCATION_ERROR;
+//        }
+        node<T, S> * smlParent = curSmall->getParent(), *smlrSon = curSmall->getLeft();
+        try{
+            delete curSmall;
+        } catch (std::bad_alloc& e){
+            return StatusType::ALLOCATION_ERROR;
         }
-        rson->setParent(parent);
-        startfix = parent;
-    } else if(lson && !rson){
-        if (pside){
-            parent->setLeft(lson);
-        } else{
-            parent->setRight(lson);
-        }
-        lson->setParent(parent);
-        startfix = parent;
-    }
-        // if node has two sons replace it with smallest node in right subtree
-    else if(lson && rson){
-        std::cout << "both exist" << std::endl;
-        //find smallest
-        bool first = true;
-        node<T, S> * curSmall = rson;
-        while (curSmall->getLeft()){
-            first = false;
-            curSmall = curSmall->getLeft();
-        }
-        // detach smallest from current position and connect his parent to his right son
-        if(!first){
-            curSmall->getParent()->setLeft(curSmall->getRight());
-            if (curSmall->getRight()) curSmall->getRight()->setParent(curSmall->getParent());
-        }
-        startfix = first? curSmall: curSmall->getParent();
-        // connect smallest to toRemove parent
-        curSmall->setParent(parent);
-        if(pside){
-            parent->setLeft(curSmall);
-        } else{
-            parent->setRight(curSmall);
-        }
-        // connect smallest to toRemove sons
-        curSmall->setLeft(lson);
-        curSmall->getLeft()->setParent(curSmall);
-        if (!first) curSmall->setRight(rson);
-        if (!first) curSmall->getRight()->setParent(curSmall);
-    } else{
-        std::cout << "none exist" << std::endl;
-        if (pside){
-            parent->setLeft(nullptr);
+        toRemove->setKey(tempKey);
+        toRemove->setValue(tempValue);
+        if (first){
+            smlParent->setRight(smlrSon);
         }else{
-            parent->setRight(nullptr);
+            smlParent->setLeft(smlrSon);
         }
-        startfix = parent;
+        if (smlrSon) smlrSon->setParent(smlParent);
     }
     fixTree(startfix);
     size--;
@@ -382,6 +340,7 @@ void avl<T, S>::destructorAux(node<T, S> *cur) {
 
 template<typename T, typename S>
 T avl<T, S>::findMax() {
+    if (!root) return T();
     node<T, S> *cur = root;
     while (cur->getRight()){
         cur = cur->getRight();
@@ -391,6 +350,7 @@ T avl<T, S>::findMax() {
 
 template<typename T, typename S>
 T avl<T, S>::findMin() {
+    if (!root) return T();
     node<T, S> *cur = root;
     while (cur->getLeft()){
         cur = cur->getLeft();
