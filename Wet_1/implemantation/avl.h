@@ -5,6 +5,7 @@
 #include "node.h"
 #include "../Scripts/wet1util.h"
 #include <cmath>
+#include <iostream>
 
 template <typename T, typename S>
 class avl{
@@ -33,20 +34,41 @@ private:
     void rotateRL(node<T, S> * toFix);
     void rotateLR(node<T, S> * toFix);
     void destructorAux(node<T, S> * cur);
-
+    void printTree();
+    void printTreeAux(node<T, S>* cur);
 };
+
+template<typename T, typename S>
+void avl<T, S>::printTreeAux(node<T, S>* cur) {
+    if (!cur) return;
+    printTreeAux(cur->getLeft());
+    std::cout << " " << cur->getKey() << " ";
+    printTreeAux(cur->getRight());
+}
+
+template<typename T, typename S>
+void avl<T, S>::printTree() {
+    node<T, S> * cur = root;
+    printTreeAux(cur);
+    std::cout << std::endl;
+}
+
 
 template<typename T, typename S>
 StatusType avl<T, S>::insert(T &key, S &value) {
     node<T, S> * newNode = new node<T, S>(key, value);
-    if (newNode == nullptr){    //Todo - check if legal
+    std::cout << "newNode value: " << newNode->getValue() << std::endl;
+    if (!newNode){    //Todo - check if legal
         return StatusType::ALLOCATION_ERROR;
     }
     if (!root){
         root = newNode;
+        size++;
+        maxKey = root->getKey();
+        minKey = root->getKey();
         return StatusType::SUCCESS;
     }
-    if(unique && newNode->getKey() == find(key)){
+    if(unique && find(key)){
         return StatusType::FAILURE;
     }
     node<T, S> * parent = findAux(key);
@@ -55,19 +77,26 @@ StatusType avl<T, S>::insert(T &key, S &value) {
     } else {
         parent->setRight(newNode);
     }
+    newNode->setParent(parent);
     while(parent){
         parent->updateHeight();
         parent = parent->getParent();
     }
+    printTree();
+    std::cout << "fix reached" << std::endl;
     fixTree(newNode);
+    std::cout << "fixed" << std::endl;
+
     size++;
     maxKey = findMax();
     minKey = findMin();
+    printTree();
+    return StatusType::SUCCESS;
 }
 
 template<typename T, typename S>
 node<T, S> *avl<T, S>::findAux(T &key) {
-    node<T, S> * cur = root, parent = nullptr;
+    node<T, S> * cur = root, *parent = nullptr;
     while (cur){
         if (cur->getKey() == key){
             return parent;
@@ -85,10 +114,17 @@ node<T, S> *avl<T, S>::findAux(T &key) {
 
 template<typename T, typename S>
 S *avl<T, S>::find(T &key) {
+    std::cout << "key to find: " << key << std::endl;
     node<T, S> * parent = findAux(key);
-    if (parent->getLeft()->getKey() == key){
+    std::cout << "parent " << parent << std::endl;
+    if (!parent && root) return &root->getValue();
+    if (!parent) return nullptr;
+    std::cout << "parent " << parent->getKey() << std::endl;
+    if (parent->getLeft()) std::cout << "parent " << parent->getLeft()->getKey() << std::endl;
+    if (parent->getRight()) std::cout << "parent " << parent->getRight()->getKey() << std::endl;
+    if (parent->getLeft() && parent->getLeft()->getKey() == key){
         return &parent->getLeft()->getValue();
-    } else if(parent->getRight()->getKey() == key){
+    } else if(parent->getRight() && parent->getRight()->getKey() == key){
         return &parent->getRight()->getValue();
     }
     return nullptr;
@@ -96,80 +132,91 @@ S *avl<T, S>::find(T &key) {
 
 template<typename T, typename S>
 void avl<T, S>::rotateLL(node<T, S> * toFix) {
-    node<T, S> * lSon = toFix->getLeft();
-    toFix->setLeft(lSon->getRight());
+    node<T, S> * lSon = toFix->getLeft(), *parent = toFix->getParent();
+    node<T, S> * lrson = lSon->getRight();
+    //pside is True if tofix is left son
+    if (parent){
+        bool pside = toFix->getParent()->getKey() > toFix->getKey();
+        if (pside){
+            parent->setLeft(lSon);
+        } else{
+            parent->setRight(lSon);
+        }
+    }else{
+        root = lSon;
+    }
+    lSon->setParent(parent);
+
+    toFix->setLeft(lrson);
+    if (lrson) lrson->setParent(toFix);
+
     lSon->setRight(toFix);
-    lSon->setParent(toFix->getParent());
     toFix->setParent(lSon);
+
     toFix->updateHeight();
     lSon->updateHeight();
 }
 
 template<typename T, typename S>
 void avl<T, S>::rotateRR(node<T, S> * toFix) {
-    node<T, S> * rSon = toFix->getRight();
-    toFix->setRight(rSon->getLeft());
+    node<T, S> * rSon = toFix->getRight(), *parent = toFix->getParent();
+    node<T, S> * rlson = rSon->getLeft();
+    //pside is True if tofix is left son
+    if (parent){
+        bool pside = toFix->getParent()->getKey() > toFix->getKey();
+        if (pside){
+            parent->setLeft(rSon);
+        } else{
+            parent->setRight(rSon);
+        }
+    } else{
+        root = rSon;
+    }
+    rSon->setParent(parent);
+
+    toFix->setRight(rlson);
+    if (rlson) rlson->setParent(toFix);
+
     rSon->setLeft(toFix);
-    rSon->setParent(toFix->getParent());
     toFix->setParent(rSon);
+
     toFix->updateHeight();
     rSon->updateHeight();
 }
 
 template<typename T, typename S>
 void avl<T, S>::rotateLR(node<T, S> * toFix) {
-    node<T, S> * lSon = toFix->getLeft();
-    node<T, S> * lrSon = lSon->getRight();
-    lSon->setRight(lrSon->getLeft());
-    toFix->setLeft(lrSon->getRight());
-    lrSon->setLeft(lSon);
-    lrSon->setRight(toFix);
-    lSon->getRight()->setParent(lSon);
-    toFix->getLeft()->setParent(toFix);
-    lrSon->setParent(toFix->getParent());
-    toFix->setParent(lrSon);
-    lSon->setParent(lrSon);
-    lSon->updateHeight();
-    toFix->updateHeight();
-    lrSon->updateHeight();
+    rotateRR(toFix->getLeft());
+    rotateLL(toFix);
 }
 
 template<typename T, typename S>
 void avl<T, S>::rotateRL(node<T, S> * toFix) {
-    node<T, S> * rSon = toFix->getRight();
-    node<T, S> * rlSon = rSon->getLeft();
-    rSon->setLeft(rlSon->getRight());
-    toFix->setRight(rlSon->getLeft());
-    rlSon->setRight(rSon);
-    rlSon->setLeft(toFix);
-    rSon->getLeft()->setParent(rSon);
-    toFix->getRight()->setParent(toFix);
-    rlSon->setParent(toFix->getParent());
-    toFix->setParent(rlSon);
-    rSon->setParent(rlSon);
-    rSon->updateHeight();
-    toFix->updateHeight();
-    rlSon->updateHeight();
+    rotateLL(toFix->getRight());
+    rotateRR(toFix);
 }
 
 template<typename T, typename S>
 void avl<T, S>::fixTree(node<T, S> *start) {
     node<T, S> * cur = start;
     while (cur){
+        printTree();
         cur->updateHeight();
         int bf = cur->getBf();
+        std::cout << "bf: " << bf << std::endl;
+
         if (abs(bf) < 2){
             cur = cur->getParent();
             continue;
         }
         if (bf == 2){
-            if (cur->getLeft()->getBf() == 1){
+            if (cur->getLeft()->getBf() >= 0){ // Todo understand if 0 or 1
                 rotateLL(cur);
             } else{
                 rotateLR(cur);
             }
         } else {
-            if (cur->getLeft()->getBf() == -1) {
+            if (cur->getRight()->getBf() <= 0) { // TODO - understand if 0 or -1
                 rotateRR(cur);
             } else {
                 rotateRL(cur);
@@ -182,13 +229,71 @@ void avl<T, S>::fixTree(node<T, S> *start) {
 
 template<typename T, typename S>
 StatusType avl<T, S>::remove(T &key) {
-    avl<T, S> backupTree = avl<T, S>(*this);
-    node<T, S> * toRemove = find(key);
-    if (!toRemove){
-        return StatusType::FAILURE;
+    node<T, S> * parent = findAux(key);
+    node<T, S> * toRemove = nullptr;
+    if (!parent){
+        if (!root) return StatusType::FAILURE;  //TODO - fix
+        toRemove = root;
     }
-    bool pside = toRemove->getParent()->getKey() > key;
-    node<T, S> * parent = toRemove->getParent(), lson = toRemove->getLeft(), rson = toRemove->getRight();
+    else if (!parent->getLeft() && !parent->getRight()){
+        return StatusType::FAILURE;
+    }else{
+        bool pside = parent->getKey() > key;
+        toRemove = pside? parent->getLeft(): parent->getRight();
+    }
+    node<T, S> * lson = toRemove->getLeft(), * rson = toRemove->getRight();
+    //if toRemove only has one son
+    if (!rson && !lson){
+        bool isRoot = (toRemove == root);
+        try{
+            delete toRemove;
+        } catch (std::bad_alloc& e){
+            return StatusType::ALLOCATION_ERROR;
+        }
+        if (isRoot){
+            root == nullptr;
+            return StatusType::SUCCESS;
+        }
+        bool pside = parent->getKey() > key;
+        if (pside){
+            parent->setLeft(nullptr);
+        } else{
+            parent->setRight(nullptr);
+        }
+    }
+    else if ((rson && !lson) || (!rson && lson)){
+        try{
+            delete toRemove;
+        } catch (std::bad_alloc& e){
+            return StatusType::ALLOCATION_ERROR;
+        }
+        node<T, S> * replacement = lson? lson: rson;
+        if (toRemove == root){
+            root = replacement;
+            replacement->setParent(nullptr);
+        }else{
+            bool pside = parent->getKey() > key;
+            if (pside){
+                parent->setLeft(replacement);
+            }else{
+                parent->setRight(replacement);
+            }
+            replacement->setParent(parent);
+        }
+    }
+    else{
+        bool first = true;
+        node<T, S> * curSmall = rson;
+        while (curSmall->getLeft()){
+            first = false;
+            curSmall = curSmall->getLeft();
+        }
+        T * tempKey = & toRemove->getKey();
+        S * tempValue = & toRemove->getValue();
+    }
+
+
+
     try{
         delete toRemove;
     } catch (std::bad_alloc& e){
@@ -215,6 +320,7 @@ StatusType avl<T, S>::remove(T &key) {
     }
         // if node has two sons replace it with smallest node in right subtree
     else if(lson && rson){
+        std::cout << "both exist" << std::endl;
         //find smallest
         bool first = true;
         node<T, S> * curSmall = rson;
@@ -223,15 +329,11 @@ StatusType avl<T, S>::remove(T &key) {
             curSmall = curSmall->getLeft();
         }
         // detach smallest from current position and connect his parent to his right son
-        if(first){
-            curSmall->getParent()->setRight(curSmall->getRight());
-        } else{
+        if(!first){
             curSmall->getParent()->setLeft(curSmall->getRight());
+            if (curSmall->getRight()) curSmall->getRight()->setParent(curSmall->getParent());
         }
-        startfix = curSmall->getParent();
-        if (curSmall->getRight()) {
-            curSmall->getRight()->setParent(curSmall->getParent());
-        }
+        startfix = first? curSmall: curSmall->getParent();
         // connect smallest to toRemove parent
         curSmall->setParent(parent);
         if(pside){
@@ -241,10 +343,11 @@ StatusType avl<T, S>::remove(T &key) {
         }
         // connect smallest to toRemove sons
         curSmall->setLeft(lson);
-        curSmall->setRight(rson);
         curSmall->getLeft()->setParent(curSmall);
-        curSmall->getRight()->setParent(curSmall);
+        if (!first) curSmall->setRight(rson);
+        if (!first) curSmall->getRight()->setParent(curSmall);
     } else{
+        std::cout << "none exist" << std::endl;
         if (pside){
             parent->setLeft(nullptr);
         }else{
@@ -256,6 +359,7 @@ StatusType avl<T, S>::remove(T &key) {
     size--;
     maxKey = findMax();
     minKey = findMin();
+    return StatusType::SUCCESS;
 }
 
 template<typename T, typename S>
@@ -282,7 +386,7 @@ T avl<T, S>::findMax() {
     while (cur->getRight()){
         cur = cur->getRight();
     }
-    return cur;
+    return cur->getKey();
 }
 
 template<typename T, typename S>
@@ -291,7 +395,7 @@ T avl<T, S>::findMin() {
     while (cur->getLeft()){
         cur = cur->getLeft();
     }
-    return cur;
+    return cur->getKey();
 }
 
 template<typename T, typename S>
