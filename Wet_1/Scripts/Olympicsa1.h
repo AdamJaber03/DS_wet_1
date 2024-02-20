@@ -20,11 +20,13 @@
 #include "node.h"
 #include "wet1util.h"
 #include "Team.h"
+#include "Contestant.h"
 
 class Olympics {
 private:
 	avl<int, Country> countries;
     avl<int, Team> teams;
+    avl<int, Contestant> contestants;
 
 	
 public:
