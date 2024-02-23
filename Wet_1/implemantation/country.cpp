@@ -1,29 +1,37 @@
 #include "country.h"
 
-int Country::getId() {
+int Country::getId() const {
     return id;
 }
 
-int Country::getMedals() {
-    return medals
+int Country::getMedals() const {
+    return medals;
 }
 
 void Country::addMedal() {
     medals++;
 }
 
-int Country::getTeams() {
+int Country::getTeams() const {
     return teams;
 }
 
-int Country::getContestants() {
+int Country::getContestants() const {
     return contestants;
 }
 
-void Country::setTeams(int teams) {
-    teams = teams;
+void Country::removeTeam() {
+    teams--;
 }
 
-void Country::setContestants(int contestants) {
-    contestants = contestants;
+void Country::addTeam() {
+    teams++;
+}
+
+void Country::addContestant() {
+    contestants++;
+}
+
+void Country::removeContestant() {
+    contestants--;
 }

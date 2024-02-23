@@ -15,12 +15,12 @@
 #ifndef STREAMINGDBA1_H_
 #define STREAMINGDBA1_H_
 
-#include "country.h"
-#include "avl.h"
-#include "node.h"
+#include "../implemantation/country.h"
+#include "../implemantation/avl.h"
+#include "../implemantation/node.h"
 #include "wet1util.h"
-#include "Team.h"
-#include "Contestant.h"
+#include "../implemantation/Team.h"
+#include "../implemantation/Contestant.h"
 
 class Olympics {
 private:

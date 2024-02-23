@@ -7,8 +7,9 @@
 template <typename T, typename S>
 class node{
 public:
-    virtual ~node() = default;
-    node(T key, S value) : key(key), value(value), height(0), left(nullptr), right(nullptr), parent(nullptr) {};
+    virtual ~node() = default;  //TODO - might be problem;
+    node(): key(T()), value(S()), height(0), left(nullptr), right(nullptr){};
+    node(T key, S value) : key(key), value(value), height(0), left(nullptr), right(nullptr), parent(nullptr) {};    //height should be -1
     void setParent(node * parent);
     void setRight(node * right);
     void setLeft(node * left);

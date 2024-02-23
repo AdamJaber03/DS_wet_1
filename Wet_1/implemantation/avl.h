@@ -6,11 +6,12 @@
 #include "../Scripts/wet1util.h"
 #include <cmath>
 #include <iostream>
+#include "pair.h"
 
 template <typename T, typename S>
 class avl{
 public:
-    avl(): root(nullptr), size(0), maxKey(0), minKey(0) {};
+    avl(): root(nullptr), size(0), maxKey(T()), minKey(T()), unique(true) {};
     virtual ~avl();
     StatusType insert(T & key, S &value);
     StatusType remove(T & key);
@@ -19,13 +20,17 @@ public:
     T getMax();
     T getMin();
     int getSize();
+    pair<T, S> * getInorder();
+    void createEmpty(int size);
+    void fillEmpty(pair<T, S> *list);
+    void fillByValue(pair<T, S> *list, const S& min, const S& max);
 
 private:
     node<T, S> * root;
     int size;
-    bool unique = true;
-    int maxKey;
-    int minKey;
+    bool unique;
+    T maxKey;
+    T minKey;
     T findMax();
     T findMin();
     node<T, S> * findAux(T & key);
@@ -35,29 +40,139 @@ private:
     void rotateRL(node<T, S> * toFix);
     void rotateLR(node<T, S> * toFix);
     void destructorAux(node<T, S> * cur);
-    void printTree();
-    void printTreeAux(node<T, S>* cur);
+//    void printTree();
+//    void printTreeAux(node<T, S>* cur);
+    void getInorderAux(pair<T, S> *list, int &i, node<T, S> *cur);
+    void createEmptyAux(node<T, S> *parent, int height);
+    void removeTail(int i);
+    void removeTailAux(int i, node<T, S> * cur);
+
+    void fillEmptyAux(node<T, S> *cur, pair<T, S> *list, int &i);
+    void fillByValueAux(pair<T, S>* list, const S &min, const S &max, node<T, S>* cur, int &i);
 };
+
+template<typename T, typename S>
+void avl<T, S>::fillByValueAux(pair<T, S> *list, const S &min, const S &max, node<T, S> *cur, int &i) {
+    if (!cur) return;
+    fillByValueAux(list, min, max, cur->getLeft(), i);
+    while (!(min <= list[i].getP2() && list[i].getP2() <= max)){
+        i++;
+    }
+    cur->setKey(list[i].getP1());
+    cur->setValue(list[i].getP2());
+    i++;
+    fillByValueAux(list, min, max, cur->getRight(), i);
+
+}
+
+template<typename T, typename S>
+void avl<T, S>::fillByValue(pair<T, S> *list, const S& min, const S& max) {
+    int i = 0;
+    fillByValueAux(list, min, max, root, i);
+    minKey = findMin();
+    maxKey = findMax();
+}
+
+template<typename T, typename S>
+void avl<T, S>::removeTailAux(int i, node<T, S> *cur) {
+    if (!cur || !i) return;
+    node<T, S> * left = cur->getLeft(), *right = cur->getRight();
+    removeTailAux(i, right);
+
+    if (!left && !right){
+        bool pside = cur->getKey() < cur->getParent()->getKey();
+        if (pside){
+            cur->getParent()->setLeft(nullptr);
+        }else{
+            cur->getParent()->setRight(nullptr);
+        }
+        delete cur;
+        i--;
+    }
+    removeTailAux(i, left);
+}
+
+template<typename T, typename S>
+void avl<T, S>::removeTail(int i) {
+    removeTailAux(i, root);
+}
+
+template<typename T, typename S>
+void avl<T, S>::createEmpty(int treeSize) {
+    if (root) return;
+    int height = ceil(log2(treeSize+1)) - 1;
+    root = new node<T, S>();
+    createEmptyAux(root, height);
+    removeTail((1<<(height + 1)) - 1 - treeSize);
+    size = treeSize;
+}
+
+template<typename T, typename S>
+void avl<T, S>::fillEmpty(pair<T, S> * list){
+    int i = 0;
+    fillEmptyAux(root, list, i);
+    minKey = findMin();
+    maxKey = findMax();
+}
+
+template<typename T, typename S>
+void avl<T, S>::fillEmptyAux(node<T, S> * cur, pair<T, S> * list, int &i){
+    if (!cur) return;
+    fillEmptyAux(cur->getLeft(), list, i);
+    cur->setKey(list[i].getP1());
+    cur->setValue(list[i].getP2());
+    i++;
+    fillEmptyAux(cur->getRight(), list, i);
+}
+
+template<typename T, typename S>
+void avl<T, S>::createEmptyAux(node<T, S>* parent, int height){
+    if (!height) return;
+    node<T, S> *left = new node<T, S>();
+    node<T, S> *right = new node<T, S>();
+    left->setParent(parent);
+    right->setParent(parent);
+    parent->setLeft(left);
+    parent->setRight(right);
+    createEmptyAux(parent->getLeft(), height - 1);
+    createEmptyAux(parent->getRight(), height - 1);
+}
+
+template<typename T, typename S>
+pair<T, S> * avl<T, S>::getInorder() {
+    pair<T, S>* list = new pair<T, S>[size];      //TODO - need to delete list
+    int i = 0;
+    getInorderAux(list, i, root);
+    return list;
+}
+
+template<typename T, typename S>
+void avl<T, S>::getInorderAux(pair<T, S>* list, int &i, node<T, S>* cur) {
+    if (!cur) return;
+    getInorderAux(list, i, cur->getLeft());
+    list[i++] = pair<T,S>(cur->getKey(), cur->getValue());
+    getInorderAux(list, i, cur->getRight());
+}
 
 template<typename T, typename S>
 int avl<T, S>::getSize() {
     return size;
 }
 
-template<typename T, typename S>
-void avl<T, S>::printTreeAux(node<T, S>* cur) {
-    if (!cur) return;
-    printTreeAux(cur->getLeft());
-    std::cout << " " << cur->getKey() << " ";
-    printTreeAux(cur->getRight());
-}
+//template<typename T, typename S>
+//void avl<T, S>::printTreeAux(node<T, S>* cur) {
+//    if (!cur) return;
+//    printTreeAux(cur->getLeft());
+//    std::cout << " " << cur->getKey() << " ";
+//    printTreeAux(cur->getRight());
+//}
 
-template<typename T, typename S>
-void avl<T, S>::printTree() {
-    node<T, S> * cur = root;
-    printTreeAux(cur);
-    std::cout << std::endl;
-}
+//template<typename T, typename S>
+//void avl<T, S>::printTree() {
+//    node<T, S> * cur = root;
+//    printTreeAux(cur);
+//    std::cout << std::endl;
+//}
 
 
 template<typename T, typename S>
@@ -87,13 +202,13 @@ StatusType avl<T, S>::insert(T &key, S &value) {
         parent->updateHeight();
         parent = parent->getParent();
     }
-    printTree();
+//    printTree();
     fixTree(newNode);
 
     size++;
     maxKey = findMax();
     minKey = findMin();
-    printTree();
+//    printTree();
     return StatusType::SUCCESS;
 }
 
@@ -198,7 +313,7 @@ template<typename T, typename S>
 void avl<T, S>::fixTree(node<T, S> *start) {
     node<T, S> * cur = start;
     while (cur){
-        printTree();
+//        printTree();
         cur->updateHeight();
         int bf = cur->getBf();
 
