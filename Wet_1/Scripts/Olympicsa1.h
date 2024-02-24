@@ -19,14 +19,15 @@
 #include "../implemantation/avl.h"
 #include "../implemantation/node.h"
 #include "wet1util.h"
+#include "iostream"
 #include "../implemantation/Team.h"
 #include "../implemantation/Contestant.h"
 
 class Olympics {
 private:
-	avl<int, Country> countries;
-    avl<int, Team> teams;
-    avl<int, Contestant> contestants;
+	avl<int, Country> *countries;
+    avl<int, Team> *teams;
+    avl<int, Contestant>  *contestants;
 
 	
 public:

@@ -1,6 +1,6 @@
 #include "Team.h"
 
-Team::Team(int teamId, Country * country, Sport sport): teamId(teamId), country(country), sport(sport), numContestants(0), s1(), s2(), s3(), st1(), st2(), st3() {
+Team::Team(int teamId, Country * country, Sport sport): teamId(teamId), country(country), sport(sport), numContestants(0),austerity(0), s1(), s2(), s3(), st1(), st2(), st3() {
     s1 = new avl<int, int>;
     try{
         s2 = new avl<int, int>;
@@ -85,6 +85,7 @@ StatusType Team::addContestant(int id, int strength){
     }
     numContestants++;
     status = balanceTeam();
+    updateAusterity();
     return status;
 }
 StatusType Team::removeContestant(int id) {
@@ -115,6 +116,7 @@ StatusType Team::removeContestant(int id) {
     }
     numContestants--;
     status = balanceTeam();
+    updateAusterity();
     return status;
 }
 
@@ -573,4 +575,202 @@ Team::~Team() {
 
 Country* Team::getCountry() {
     return country;
+}
+
+int Team::getAusterity() {
+    return austerity;
+}
+
+int Team::calculateAusterity(int toRemoveS1, int toRemoveS2, int toRemoveS3) {
+    pair<int, int> *tempKeysSt1, *tempKeysSt2, *tempKeysSt3;
+    int *tempIdSt1, *tempIdSt2, *tempIdSt3;
+    int newStrength = this->getStrength();
+    for(int i=0; i < toRemoveS1; i++){
+        pair<int,int> minStrength = st1->getMin();
+        int minId = minStrength.getP2();
+        tempKeysSt1[i] = minStrength;
+        tempIdSt1[i] = *s1->find(minId);
+        s1->remove(minId);
+        st1->remove(minStrength);
+    }
+    for(int i=0; i < toRemoveS2; i++){
+        pair<int,int> minStrength = st2->getMin();
+        int minId = minStrength.getP2();
+        tempKeysSt2[i] = minStrength;
+        tempIdSt2[i] = *s2->find(minId);
+        s2->remove(minId);
+        st2->remove(minStrength);
+    }
+    for(int i=0; i < toRemoveS3; i++){
+        pair<int,int> minStrength = st3->getMin();
+        int minId = minStrength.getP2();
+        tempKeysSt3[i] = minStrength;
+        tempIdSt3[i] = *s3->find(minId);
+        s3->remove(minId);
+        st3->remove(minStrength);
+    }
+    newStrength = this->getStrength();
+    for(int i=0; i < toRemoveS1; i++){
+        int strength = tempKeysSt1[i].getP1();
+        try{
+            s1->insert(tempIdSt1[i], strength);
+        }
+        catch(std::bad_alloc &e){
+            delete tempIdSt1;
+            delete tempKeysSt1;
+            delete tempIdSt2;
+            delete tempKeysSt2;
+            delete tempIdSt3;
+            delete tempKeysSt3;
+            throw e;
+        }
+        try{
+            st1->insert(tempKeysSt1[i], tempIdSt1[i]);
+        }
+        catch(std::bad_alloc &e){
+            delete tempIdSt1;
+            delete tempKeysSt1;
+            delete tempIdSt2;
+            delete tempKeysSt2;
+            delete tempIdSt3;
+            delete tempKeysSt3;
+            throw e;
+        }
+    }
+    for(int i=0; i < toRemoveS2; i++){
+        int strength = tempKeysSt2[i].getP1();
+        try{
+            s1->insert(tempIdSt2[i], strength);
+        }
+        catch(std::bad_alloc &e){
+            delete tempIdSt1;
+            delete tempKeysSt1;
+            delete tempIdSt2;
+            delete tempKeysSt2;
+            delete tempIdSt3;
+            delete tempKeysSt3;
+            throw e;
+        }
+        try{
+            st1->insert(tempKeysSt2[i], tempIdSt2[i]);
+        }
+        catch(std::bad_alloc &e){
+            delete tempIdSt1;
+            delete tempKeysSt1;
+            delete tempIdSt2;
+            delete tempKeysSt2;
+            delete tempIdSt3;
+            delete tempKeysSt3;
+            throw e;
+        }
+    }
+    for(int i=0; i < toRemoveS3; i++){
+        int strength = tempKeysSt3[i].getP1();
+        try{
+            s1->insert(tempIdSt3[i], strength);
+        }
+        catch(std::bad_alloc &e){
+            delete tempIdSt1;
+            delete tempKeysSt1;
+            delete tempIdSt2;
+            delete tempKeysSt2;
+            delete tempIdSt3;
+            delete tempKeysSt3;
+            throw e;
+        }
+        try{
+            st1->insert(tempKeysSt3[i], tempIdSt3[i]);
+        }
+        catch(std::bad_alloc &e){
+            delete tempIdSt1;
+            delete tempKeysSt1;
+            delete tempIdSt2;
+            delete tempKeysSt2;
+            delete tempIdSt3;
+            delete tempKeysSt3;
+            throw e;
+        }
+    }
+    delete tempIdSt1;
+    delete tempKeysSt1;
+    delete tempIdSt2;
+    delete tempKeysSt2;
+    delete tempIdSt3;
+    delete tempKeysSt3;
+    return newStrength;
+}
+
+void Team::updateAusterity() {
+    int max = 0, trial = 0;
+    try{
+        trial = calculateAusterity(1,1,1);
+        if(trial > max) max = trial;
+    }
+    catch(std::bad_alloc &e){
+        throw e;
+    }
+    try{
+        trial = calculateAusterity(3,0,0);
+        if(trial > max) max = trial;
+    }
+    catch(std::bad_alloc &e){
+        throw e;
+    }
+    try{
+        trial = calculateAusterity(0,3,0);
+        if(trial > max) max = trial;
+    }
+    catch(std::bad_alloc &e){
+        throw e;
+    }
+    try{
+        trial = calculateAusterity(0,0,3);
+        if(trial > max) max = trial;
+    }
+    catch(std::bad_alloc &e){
+        throw e;
+    }
+    try{
+        trial = calculateAusterity(2,1,0);
+        if(trial > max) max = trial;
+    }
+    catch(std::bad_alloc &e){
+        throw e;
+    }
+    try{
+        trial = calculateAusterity(2,0,1);
+        if(trial > max) max = trial;
+    }
+    catch(std::bad_alloc &e){
+        throw e;
+    }
+    try{
+        trial = calculateAusterity(1,2,0);
+        if(trial > max) max = trial;
+    }
+    catch(std::bad_alloc &e){
+        throw e;
+    }
+    try{
+        trial = calculateAusterity(0,2,1);
+        if(trial > max) max = trial;
+    }
+    catch(std::bad_alloc &e){
+        throw e;
+    }
+    try{
+        trial = calculateAusterity(1,0,2);
+        if(trial > max) max = trial;
+    }
+    catch(std::bad_alloc &e){
+        throw e;
+    }
+    try{
+        trial = calculateAusterity(0,1,2);
+        if(trial > max) max = trial;
+    }
+    catch(std::bad_alloc &e){
+        throw e;
+    }
+    austerity = max;
 }

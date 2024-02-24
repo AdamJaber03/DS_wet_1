@@ -358,11 +358,7 @@ StatusType avl<T, S>::remove(T &key) {
     //if toRemove only has one son
     if (!rson && !lson){
         bool isRoot = (toRemove == root);
-        try{
-            delete toRemove;
-        } catch (std::bad_alloc& e){
-            return StatusType::ALLOCATION_ERROR;
-        }
+        delete toRemove;
         if (isRoot){
             root = nullptr;
         }else{
@@ -376,11 +372,7 @@ StatusType avl<T, S>::remove(T &key) {
         startfix = parent;
     }
     else if ((rson && !lson) || (!rson && lson)){
-        try{
-            delete toRemove;
-        } catch (std::bad_alloc& e){
-            return StatusType::ALLOCATION_ERROR;
-        }
+        delete toRemove;
         node<T, S> * replacement = lson? lson: rson;
         if (toRemove == root){
             root = replacement;
@@ -406,16 +398,8 @@ StatusType avl<T, S>::remove(T &key) {
         startfix = curSmall->getParent();
         T tempKey = curSmall->getKey();
         S tempValue = curSmall->getValue();
-//        StatusType status = remove(curSmall->getKey());
-//        if (status == StatusType::ALLOCATION_ERROR){
-//            return StatusType::ALLOCATION_ERROR;
-//        }
         node<T, S> * smlParent = curSmall->getParent(), *smlrSon = curSmall->getLeft();
-        try{
-            delete curSmall;
-        } catch (std::bad_alloc& e){
-            return StatusType::ALLOCATION_ERROR;
-        }
+        delete curSmall;
         toRemove->setKey(tempKey);
         toRemove->setValue(tempValue);
         if (first){
