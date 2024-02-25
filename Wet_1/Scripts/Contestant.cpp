@@ -20,7 +20,7 @@ int Contestant::getNumTeams() {
 }
 
 void Contestant::setStrength(int updateStrength) {
-    strength = updateStrength;      //TODO - not sure about this i think its strength = strength - update
+    strength = updateStrength;
 }
 
 void Contestant::addTeam(int teamId) {
@@ -63,4 +63,10 @@ Contestant::~Contestant() {
 
 bool Contestant::operator<(const Contestant &toCompare) const {
     return true;
+}
+
+void Contestant::updateTeam(int oldID, int newID) {
+    for (int i = 0; i < 3; ++i) {
+        if (teamIds[i] == oldID) teamIds[i] = newID;
+    }
 }

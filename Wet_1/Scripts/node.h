@@ -2,15 +2,15 @@
 #ifndef DS_WET_1_NODE_H
 #define DS_WET_1_NODE_H
 
-
-#include <ntdef.h>
+#include <iostream>
 
 template <typename T, typename S>
 class node{
 public:
-    virtual ~node() = default;  //TODO - might be problem;
+    virtual ~node()= default;;  //TODO - might be problem;
     node(): key(T()), value(S()), height(0), left(nullptr), right(nullptr){};
-    node(T key, S value) : key(key), value(value), height(0), left(nullptr), right(nullptr), parent(nullptr) {};    //height should be -1
+    node(T key, S value) : key(key), value(value), height(0), left(nullptr), right(nullptr), parent(nullptr) {
+    };    //height should be -1
     void setParent(node * parent);
     void setRight(node * right);
     void setLeft(node * left);

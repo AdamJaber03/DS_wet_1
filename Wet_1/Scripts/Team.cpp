@@ -1,15 +1,15 @@
 #include "Team.h"
 
 Team::Team(int teamId, Country * country, Sport sport): teamId(teamId), country(country), sport(sport), numContestants(0),austerity(0), s1(), s2(), s3(), st1(), st2(), st3() {
-    s1 = new avl<int, int>;
+    s1 = new avl<int, Contestant*>;
     try{
-        s2 = new avl<int, int>;
+        s2 = new avl<int, Contestant*>;
     }catch(std::bad_alloc& err){
         delete s1;
         throw err;
     }
     try{
-        s3 = new avl<int, int>;
+        s3 = new avl<int, Contestant*>;
     }catch(std::bad_alloc& err){
         delete s1;
         delete s2;
@@ -62,52 +62,52 @@ StatusType switchTree(T id, avl<T, S>* tree1, avl<T, S>* tree2){
     return status;
 }
 
-StatusType Team::addContestant(int id, int strength){
+StatusType Team::addContestant(int id, int strength,Contestant* contestant, bool fromUpdate){
     StatusType status = StatusType::SUCCESS;
     pair<int, int> strengthPair(strength, id);
     if(id < s1->getMax()){ //insert to s1
-        status = s1->insert(id, strength);
+        status = s1->insert(id, contestant);
         if(status != StatusType::SUCCESS) return status;
         status = st1->insert(strengthPair, id);
         if(status != StatusType::SUCCESS) return status;
     }
     else if(id < s2->getMax()){ //insert to s2
-        status = s2->insert(id, strength);
+        status = s2->insert(id, contestant);
         if(status != StatusType::SUCCESS) return status;
         status = st2->insert(strengthPair, id);
         if(status != StatusType::SUCCESS) return status;
     }
     else{ //insert to s3
-        status = s3->insert(id, strength);
+        status = s3->insert(id, contestant);
         if(status != StatusType::SUCCESS) return status;
         status = st3->insert(strengthPair, id);
         if(status != StatusType::SUCCESS) return status;
     }
     numContestants++;
     status = balanceTeam();
-    updateAusterity();
+    if (!fromUpdate) updateAusterity();
     return status;
 }
-StatusType Team::removeContestant(int id) {
+StatusType Team::removeContestant(int id, bool fromUpdate) {
     StatusType status;
     if (!s1->find(id) && !s2->find(id) && !s3->find(id)) return StatusType::FAILURE;
     pair<int, int> strengthPair;
     if (id <= s1->getMax()){
-        int strength = *s1->find(id);
+        int strength = (*s1->find(id))->getStrength();
         strengthPair = pair<int, int>(strength, id);
         status = s1->remove(id);
         if (status != StatusType::SUCCESS) return status;
         status = st1->remove(strengthPair);
         if (status != StatusType::SUCCESS) return status;
     }else if (id <= s2->getMax()){
-        int strength = *s2->find(id);
+        int strength = (*s2->find(id))->getStrength();
         strengthPair = pair<int, int>(strength, id);
         status = s2->remove(id);
         if (status != StatusType::SUCCESS) return status;
         status = st2->remove(strengthPair);
         if (status != StatusType::SUCCESS) return status;
     }else{
-        int strength = *s3->find(id);
+        int strength = (*s3->find(id))->getStrength();
         strengthPair = pair<int, int>(strength, id);
         status = s3->remove(id);
         if (status != StatusType::SUCCESS) return status;
@@ -116,7 +116,7 @@ StatusType Team::removeContestant(int id) {
     }
     numContestants--;
     status = balanceTeam();
-    updateAusterity();
+    if (!fromUpdate) updateAusterity();
     return status;
 }
 
@@ -127,18 +127,18 @@ StatusType Team::balanceTeam() {
     pair<int, int> toMovePair;
     if(numPerS  < s1->getSize()){ //if first tree not good
         toMove = s1->getMax();
-        toMoveStrength = *s1->find(toMove);
+        toMoveStrength = (*s1->find(toMove))->getStrength();
         toMovePair = pair<int, int>(toMoveStrength, toMove);
-        status = switchTree<int, int>(toMove, s1, s2);
+        status = switchTree<int, Contestant*>(toMove, s1, s2);
         if (status != StatusType::SUCCESS) return status;
         status = switchTree<pair<int, int>, int>(toMovePair, st1, st2);
         if (status != StatusType::SUCCESS) return status;
     }
     if(numPerS < s2->getSize()){ //if second tree not good
         toMove = s2->getMax();
-        toMoveStrength = *s2->find(toMove);
+        toMoveStrength = (*s2->find(toMove))->getStrength();
         toMovePair = pair<int, int>(toMoveStrength, toMove);
-        status = switchTree<int, int>(toMove, s2, s3);
+        status = switchTree<int, Contestant*>(toMove, s2, s3);
         //TODO if status isnt success return trees to old
         if (status != StatusType::SUCCESS) return status;
         status = switchTree<pair<int, int>, int>(toMovePair, st2, st3);
@@ -146,9 +146,9 @@ StatusType Team::balanceTeam() {
     }
     if(numPerS < s3->getSize()){ //if third tree not good
         toMove = s3->getMin();
-        toMoveStrength = *s3->find(toMove);
+        toMoveStrength = (*s3->find(toMove))->getStrength();
         toMovePair = pair<int, int>(toMoveStrength, toMove);
-        status = switchTree<int, int>(toMove, s3, s2);
+        status = switchTree<int, Contestant*>(toMove, s3, s2);
         //TODO if status isnt success return trees to old
         if (status != StatusType::SUCCESS) return status;
         status = switchTree<pair<int, int>, int>(toMovePair, st3, st2);
@@ -156,9 +156,9 @@ StatusType Team::balanceTeam() {
     }
     if(numPerS < s2->getSize()){ //if second tree not good
         toMove = s2->getMin();
-        toMoveStrength = *s2->find(toMove);
+        toMoveStrength = (*s2->find(toMove))->getStrength();
         toMovePair = pair<int, int>(toMoveStrength, toMove);
-        status = switchTree<int, int>(toMove, s2, s1);
+        status = switchTree<int, Contestant*>(toMove, s2, s1);
         //TODO if status isnt success return trees to old
         if (status != StatusType::SUCCESS) return status;
         status = switchTree<pair<int, int>, int>(toMovePair, st2, st1);
@@ -206,8 +206,8 @@ pair<T*, int> merge(T *arr1, int size1, T *arr2, int size2){
 
 StatusType Team::unite(Team &team2) {
     //TODO - need to delete these
-    pair<int, int>* s1Ordered, *s2Ordered, *s3Ordered, *team2s1Ordered, *team2s2Ordered, *team2s3Ordered, *mergeds2, *mergeds3, *mergedt2s1, *mergedt2s2, *merged;
-    pair<pair<int, int>*, int> mergeds2Pair, mergeds3Pair, mergedt2s1Pair, mergedt2s2Pair, mergedPair;
+    pair<int, Contestant*>* s1Ordered, *s2Ordered, *s3Ordered, *team2s1Ordered, *team2s2Ordered, *team2s3Ordered, *mergeds2, *mergeds3, *mergedt2s1, *mergedt2s2, *merged;
+    pair<pair<int, Contestant*>*, int> mergeds2Pair, mergeds3Pair, mergedt2s1Pair, mergedt2s2Pair, mergedPair;
     int mergeds2Size, mergeds3Size, mergedt2s1Size, mergedt2s2Size, mergedSize;
 
     try {
@@ -256,7 +256,7 @@ StatusType Team::unite(Team &team2) {
         return StatusType::ALLOCATION_ERROR;
     }
     try {
-        mergeds2Pair = merge<pair<int, int>>(s1Ordered, s1->getSize(), s2Ordered, s2->getSize());
+        mergeds2Pair = merge<pair<int, Contestant*>>(s1Ordered, s1->getSize(), s2Ordered, s2->getSize());
         mergeds2 = mergeds2Pair.getP1();
         mergeds2Size = mergeds2Pair.getP2();
         delete[] s1Ordered;
@@ -271,7 +271,7 @@ StatusType Team::unite(Team &team2) {
         return StatusType::ALLOCATION_ERROR;
     }
     try {
-        mergeds3Pair = merge<pair<int, int>>(mergeds2, mergeds2Size, s3Ordered, s3->getSize());
+        mergeds3Pair = merge<pair<int, Contestant*>>(mergeds2, mergeds2Size, s3Ordered, s3->getSize());
         mergeds3 = mergeds3Pair.getP1();
         mergeds3Size = mergeds3Pair.getP2();
         delete[] s3Ordered;
@@ -285,7 +285,7 @@ StatusType Team::unite(Team &team2) {
         return StatusType::ALLOCATION_ERROR;
     }
     try {
-        mergedt2s1Pair = merge<pair<int, int>>(mergeds3, mergeds3Size, team2s1Ordered, team2.s1->getSize());
+        mergedt2s1Pair = merge<pair<int, Contestant*>>(mergeds3, mergeds3Size, team2s1Ordered, team2.s1->getSize());
         mergedt2s1 = mergedt2s1Pair.getP1();
         mergedt2s1Size = mergedt2s1Pair.getP2();
         delete[] team2s1Ordered;
@@ -297,7 +297,7 @@ StatusType Team::unite(Team &team2) {
         delete[] mergeds3;
         return StatusType::ALLOCATION_ERROR;
     }try {
-        mergedt2s2Pair = merge<pair<int, int>>(mergedt2s1, mergedt2s1Size, team2s2Ordered, team2.s2->getSize());
+        mergedt2s2Pair = merge<pair<int, Contestant*>>(mergedt2s1, mergedt2s1Size, team2s2Ordered, team2.s2->getSize());
         mergedt2s2 = mergedt2s2Pair.getP1();
         mergedt2s2Size = mergedt2s2Pair.getP2();
         delete[] team2s2Ordered;
@@ -308,7 +308,7 @@ StatusType Team::unite(Team &team2) {
         delete[] mergedt2s1;
         return StatusType::ALLOCATION_ERROR;
     }try {
-        mergedPair = merge<pair<int, int>>(mergedt2s2, mergedt2s2Size, team2s3Ordered, team2.s3->getSize());
+        mergedPair = merge<pair<int, Contestant*>>(mergedt2s2, mergedt2s2Size, team2s3Ordered, team2.s3->getSize());
         merged = mergedPair.getP1();
         mergedSize = mergedPair.getP2();
         delete[] team2s3Ordered;
@@ -320,9 +320,9 @@ StatusType Team::unite(Team &team2) {
     }
     int m = mergedSize%3;
     int size1 = floor(mergedSize / 3) + (m? 1: 0), size2 = floor(mergedSize / 3) + (m==2? 1: 0), size3 = floor(mergedSize / 3);
-    avl<int, int> *news1 = nullptr, *news2= nullptr, *news3 = nullptr;
+    avl<int, Contestant*> *news1 = nullptr, *news2= nullptr, *news3 = nullptr;
     try{
-        news1 = new avl<int, int>();
+        news1 = new avl<int, Contestant*>();
     }catch (std::bad_alloc& err){
         delete[] merged;
         return StatusType::ALLOCATION_ERROR;
@@ -336,7 +336,7 @@ StatusType Team::unite(Team &team2) {
         return StatusType::ALLOCATION_ERROR;
     }
     try{
-        news2 = new avl<int, int>();
+        news2 = new avl<int, Contestant*>();
     }catch (std::bad_alloc& err){
         delete[] merged;
         delete news1;
@@ -352,7 +352,7 @@ StatusType Team::unite(Team &team2) {
         return StatusType::ALLOCATION_ERROR;
     }
     try{
-        news3 = new avl<int, int>();
+        news3 = new avl<int, Contestant*>();
     }catch (std::bad_alloc& err){
         delete[] merged;
         delete news1;
@@ -548,6 +548,10 @@ StatusType Team::unite(Team &team2) {
     st2 = newst2;
     st3 = newst3;
     numContestants = mergedSize;
+    team2.numContestants = 0;
+    updateTeamIds(s1, team2.getID());
+    updateTeamIds(s2, team2.getID());
+    updateTeamIds(s3, team2.getID());
     return StatusType::SUCCESS;
 }
 
@@ -564,7 +568,6 @@ int Team::getNumContestants() {
 }
 
 Team::~Team() {
-    country->removeTeam();
     delete s1;
     delete s2;
     delete s3;
@@ -582,199 +585,113 @@ int Team::getAusterity() {
 }
 
 int Team::calculateAusterity(int toRemoveS1, int toRemoveS2, int toRemoveS3) {
-    pair<int, int> *tempKeysSt1, *tempKeysSt2, *tempKeysSt3;
-    int *tempIdSt1, *tempIdSt2, *tempIdSt3;
+    pair<int, int> tempKeysSt1[3], tempKeysSt2[3], tempKeysSt3[3];
+    std::cout << "10" << std::endl;
+    int tempIdSt1[3], tempIdSt2[3], tempIdSt3[3];
+    Contestant* tempContestents1[3], *tempContestents2[3], *tempContestents3[3];
     int newStrength = this->getStrength();
+    std::cout << "11" << std::endl;
     for(int i=0; i < toRemoveS1; i++){
         pair<int,int> minStrength = st1->getMin();
         int minId = minStrength.getP2();
         tempKeysSt1[i] = minStrength;
         tempIdSt1[i] = minId;
+        tempContestents1[i] = *s1->find(minId);
         s1->remove(minId);
         st1->remove(minStrength);
+        numContestants--;
     }
     for(int i=0; i < toRemoveS2; i++){
         pair<int,int> minStrength = st2->getMin();
         int minId = minStrength.getP2();
         tempKeysSt2[i] = minStrength;
         tempIdSt2[i] = minId;
+        tempContestents2[i] = *s2->find(minId);
         s2->remove(minId);
         st2->remove(minStrength);
+        numContestants--;
     }
     for(int i=0; i < toRemoveS3; i++){
         pair<int,int> minStrength = st3->getMin();
         int minId = minStrength.getP2();
         tempKeysSt3[i] = minStrength;
         tempIdSt3[i] = minId;
+        tempContestents3[i] = *s3->find(minId);
         s3->remove(minId);
         st3->remove(minStrength);
+        numContestants--;
     }
+    std::cout << "11" << std::endl;
+    balanceTeam();
+    balanceTeam();
+    balanceTeam();
+    std::cout << "12" << std::endl;
     newStrength = this->getStrength();
     for(int i=0; i < toRemoveS1; i++){
         int strength = tempKeysSt1[i].getP1();
-        try{
-            s1->insert(tempIdSt1[i], strength);
-        }
-        catch(std::bad_alloc &e){
-            delete tempIdSt1;
-            delete tempKeysSt1;
-            delete tempIdSt2;
-            delete tempKeysSt2;
-            delete tempIdSt3;
-            delete tempKeysSt3;
-            throw e;
-        }
-        try{
-            st1->insert(tempKeysSt1[i], tempIdSt1[i]);
-        }
-        catch(std::bad_alloc &e){
-            delete tempIdSt1;
-            delete tempKeysSt1;
-            delete tempIdSt2;
-            delete tempKeysSt2;
-            delete tempIdSt3;
-            delete tempKeysSt3;
-            throw e;
-        }
+        addContestant(tempIdSt1[i], strength, tempContestents1[i], true);
     }
     for(int i=0; i < toRemoveS2; i++){
         int strength = tempKeysSt2[i].getP1();
-        try{
-            s1->insert(tempIdSt2[i], strength);
-        }
-        catch(std::bad_alloc &e){
-            delete tempIdSt1;
-            delete tempKeysSt1;
-            delete tempIdSt2;
-            delete tempKeysSt2;
-            delete tempIdSt3;
-            delete tempKeysSt3;
-            throw e;
-        }
-        try{
-            st1->insert(tempKeysSt2[i], tempIdSt2[i]);
-        }
-        catch(std::bad_alloc &e){
-            delete tempIdSt1;
-            delete tempKeysSt1;
-            delete tempIdSt2;
-            delete tempKeysSt2;
-            delete tempIdSt3;
-            delete tempKeysSt3;
-            throw e;
-        }
+        addContestant(tempIdSt2[i], strength, tempContestents2[i], true);
     }
     for(int i=0; i < toRemoveS3; i++){
         int strength = tempKeysSt3[i].getP1();
-        try{
-            s1->insert(tempIdSt3[i], strength);
-        }
-        catch(std::bad_alloc &e){
-            delete tempIdSt1;
-            delete tempKeysSt1;
-            delete tempIdSt2;
-            delete tempKeysSt2;
-            delete tempIdSt3;
-            delete tempKeysSt3;
-            throw e;
-        }
-        try{
-            st1->insert(tempKeysSt3[i], tempIdSt3[i]);
-        }
-        catch(std::bad_alloc &e){
-            delete tempIdSt1;
-            delete tempKeysSt1;
-            delete tempIdSt2;
-            delete tempKeysSt2;
-            delete tempIdSt3;
-            delete tempKeysSt3;
-            throw e;
-        }
+        addContestant(tempIdSt3[i], strength, tempContestents3[i], true);
     }
-    delete tempIdSt1;
-    delete tempKeysSt1;
-    delete tempIdSt2;
-    delete tempKeysSt2;
-    delete tempIdSt3;
-    delete tempKeysSt3;
+    std::cout << "13" << std::endl;
     return newStrength;
 }
 
 void Team::updateAusterity() {
+    std::cout << "1324" << std::endl;
     int max = 0, trial = 0;
-    try{
+    if(numContestants % 3 != 0){
+        austerity = 0;
+        return;
+    }
+    if(numContestants > 3){
         trial = calculateAusterity(1,1,1);
         if(trial > max) max = trial;
-    }
-    catch(std::bad_alloc &e){
-        throw e;
-    }
-    try{
-        trial = calculateAusterity(3,0,0);
-        if(trial > max) max = trial;
-    }
-    catch(std::bad_alloc &e){
-        throw e;
-    }
-    try{
-        trial = calculateAusterity(0,3,0);
-        if(trial > max) max = trial;
-    }
-    catch(std::bad_alloc &e){
-        throw e;
-    }
-    try{
-        trial = calculateAusterity(0,0,3);
-        if(trial > max) max = trial;
-    }
-    catch(std::bad_alloc &e){
-        throw e;
-    }
-    try{
         trial = calculateAusterity(2,1,0);
         if(trial > max) max = trial;
-    }
-    catch(std::bad_alloc &e){
-        throw e;
-    }
-    try{
         trial = calculateAusterity(2,0,1);
         if(trial > max) max = trial;
-    }
-    catch(std::bad_alloc &e){
-        throw e;
-    }
-    try{
         trial = calculateAusterity(1,2,0);
         if(trial > max) max = trial;
-    }
-    catch(std::bad_alloc &e){
-        throw e;
-    }
-    try{
         trial = calculateAusterity(0,2,1);
         if(trial > max) max = trial;
-    }
-    catch(std::bad_alloc &e){
-        throw e;
-    }
-    try{
         trial = calculateAusterity(1,0,2);
         if(trial > max) max = trial;
-    }
-    catch(std::bad_alloc &e){
-        throw e;
-    }
-    try{
         trial = calculateAusterity(0,1,2);
         if(trial > max) max = trial;
     }
-    catch(std::bad_alloc &e){
-        throw e;
+    if(numContestants > 6){
+        trial = calculateAusterity(3,0,0);
+        if(trial > max) max = trial;
+        trial = calculateAusterity(0,3,0);
+        if(trial > max) max = trial;
+        trial = calculateAusterity(0,0,3);
+        if(trial > max) max = trial;
     }
     austerity = max;
 }
 
 bool Team::operator<(const Team &toCompare) const {
     return true;
+}
+
+void Team::setContestants(int update) {
+    numContestants = update;
+}
+
+void Team::updateTeamIds(avl<int, Contestant *> *tree, int oldID) {
+    updateTeamIdsAux(oldID, tree->getRoot());
+}
+
+void Team::updateTeamIdsAux(int oldID, node<int, Contestant *>* cur) {
+    if (!cur) return;
+    updateTeamIdsAux(oldID, cur->getLeft());
+    updateTeamIdsAux(oldID, cur->getRight());
+    (*(cur->getValue())).updateTeam(oldID, teamId);
 }

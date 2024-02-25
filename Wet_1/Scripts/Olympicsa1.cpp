@@ -28,12 +28,12 @@ Olympics::Olympics(){
 }
 
 Olympics::~Olympics(){
-    deleteAux<Country>(countries->getRoot());
     deleteAux<Contestant>(contestants->getRoot());
     deleteAux<Team>(teams->getRoot());
-    delete countries;
+    deleteAux<Country>(countries->getRoot());
     delete contestants;
     delete teams;
+    delete countries;
 }
 	
 StatusType Olympics::add_country(int countryId, int medals){
@@ -63,51 +63,70 @@ StatusType Olympics::remove_country(int countryId){
 
 StatusType Olympics::add_team(int teamId,int countryId,Sport sport){
     if(countryId <= 0 || teamId <= 0) return StatusType::INVALID_INPUT;
-    Country * country_p = *countries->find(countryId);
+    Country ** country_pp = countries->find(countryId); //problem
+    if(!country_pp) return StatusType::FAILURE;
+    Country* country_p = *country_pp;
     Team* toAdd;
     try {
         toAdd = new Team(teamId, country_p, sport);
     } catch (std::bad_alloc& err){
         return StatusType::ALLOCATION_ERROR;
     }
-    return teams->insert(teamId, toAdd);
+    StatusType status = teams->insert(teamId, toAdd);
+    if(status != StatusType::SUCCESS) delete toAdd;
+    return status;
 }
 
 StatusType Olympics::remove_team(int teamId){
 	if(teamId <= 0) return StatusType::INVALID_INPUT;
-    Team * teamToRemove = *teams->find(teamId);
-    if(!teamToRemove || teamToRemove->getNumContestants() > 0) return StatusType::FAILURE;
+    Team ** teamToRemove_p = teams->find(teamId);
+    if(!teamToRemove_p) return StatusType::FAILURE;
+    Team * teamToRemove = *teamToRemove_p;
+    if(teamToRemove->getNumContestants() > 0) return StatusType::FAILURE;
+    Country * country = teamToRemove->getCountry();
+    StatusType status = teams->remove(teamId);
+    if (status != StatusType::SUCCESS) return status;
     delete teamToRemove;
-    return teams->remove(teamId);
+    country->removeTeam();
+    return status;
 }
 	
 StatusType Olympics::add_contestant(int contestantId ,int countryId,Sport sport,int strength){
 	if(contestantId <= 0 || countryId <= 0 ||strength < 0) return StatusType::INVALID_INPUT;
-    Country * country = *countries->find(countryId);
-    if(!country) return StatusType::FAILURE;
+    Country ** country_p = countries->find(countryId);
+    if(!country_p) return StatusType::FAILURE;
+    Country *country = *country_p;
     Contestant* addContestant;
     try{
         addContestant = new Contestant(contestantId, countryId, sport, strength, country);
     }catch (std::bad_alloc& err){
         return StatusType::ALLOCATION_ERROR;
     }
-    return contestants->insert(countryId, addContestant);
+    StatusType status = contestants->insert(contestantId, addContestant);
+    if (status != StatusType::SUCCESS) delete addContestant;
+    return status;
 }
 	
 StatusType Olympics::remove_contestant(int contestantId){
     if(contestantId <= 0) return StatusType::INVALID_INPUT;
-    Contestant * toRemove = *contestants->find(contestantId);
-    if(!toRemove || toRemove->getNumTeams() > 0) return StatusType::FAILURE;    //why??????
+    Contestant ** toRemove_p = contestants->find(contestantId);
+    if(!toRemove_p) return StatusType::FAILURE;
+    Contestant * toRemove = *toRemove_p;
+    if(toRemove->getNumTeams() > 0) return StatusType::FAILURE;    //why??????
     return contestants->remove(contestantId);
 }
 
 StatusType Olympics::add_contestant_to_team(int teamId,int contestantId){
-	if(teamId <= 0 || contestantId <= 0) return StatusType::INVALID_INPUT;
-    Team * team = *teams->find(teamId);
-    Contestant * contestant = *contestants->find(contestantId);
-    if(!contestant || !team || team->getSport() != contestant->getSport() || team->getCountryId() != contestant->getCountryId() || contestant->getNumTeams() >= 3) return StatusType::FAILURE;
+    if(teamId <= 0 || contestantId <= 0) return StatusType::INVALID_INPUT;
+    Team ** team_p = teams->find(teamId);
+    Contestant ** contestant_p = contestants->find(contestantId);
+    if(!contestant_p || !team_p) return StatusType::FAILURE;
+    Team *team = *team_p;
+    Contestant *contestant = *contestant_p;
+    if(team->getSport() != contestant->getSport() || team->getCountryId() != contestant->getCountryId() || contestant->getNumTeams() >= 3) return StatusType::FAILURE;
     int strength = contestant->getStrength();
-    StatusType status = team->addContestant(contestantId, strength);
+    StatusType status = team->addContestant(contestantId, strength, contestant);
+    std::cout << "l4" << std::endl;
     if (status != StatusType::SUCCESS) return status;
     contestant->addTeam(teamId);
     return StatusType::SUCCESS;
@@ -115,9 +134,11 @@ StatusType Olympics::add_contestant_to_team(int teamId,int contestantId){
 
 StatusType Olympics::remove_contestant_from_team(int teamId,int contestantId){
     if(teamId <= 0 || contestantId <= 0) return StatusType::INVALID_INPUT;
-    Team * team = *teams->find(teamId);
-    Contestant * contestant = *contestants->find(contestantId);
-    if(!contestant || !team) return StatusType::FAILURE;
+    Team ** team_p = teams->find(teamId);
+    Contestant ** contestant_p = contestants->find(contestantId);
+    if(!contestant_p || !team_p) return StatusType::FAILURE;
+    Team *team = *team_p;
+    Contestant *contestant = *contestant_p;
     StatusType status = team->removeContestant(contestantId);
     if (status != StatusType::SUCCESS) return status;
     contestant->removeTeam(teamId);
@@ -126,62 +147,74 @@ StatusType Olympics::remove_contestant_from_team(int teamId,int contestantId){
 
 StatusType Olympics::update_contestant_strength(int contestantId ,int change){
     if(contestantId <= 0) return StatusType::INVALID_INPUT;
-    Contestant * contestant = *contestants->find(contestantId);
-    if(!contestant) return StatusType::FAILURE;
+    Contestant ** contestant_p = contestants->find(contestantId);
+    if(!contestant_p) return StatusType::FAILURE;
+    Contestant *contestant = *contestant_p;
     int updateStr = contestant->getStrength() + change;
     if(updateStr < 0) return StatusType::FAILURE;
     StatusType status;
+    int teamIDs[3];
     for (int i = 0; i < 3; ++i) {
-        remove_contestant_from_team(contestant->getTeamIds()[i], contestantId);
+        teamIDs[i] = contestant->getTeamIds()[i];
+    }
+    for (int i = 0; i < 3; ++i) {
+        remove_contestant_from_team(teamIDs[i], contestantId);
     }
     contestant->setStrength(updateStr);
     for (int i = 0; i < 3; ++i) {
-        status = add_contestant_to_team(contestant->getTeamIds()[i], contestantId);
+        status = add_contestant_to_team(teamIDs[i], contestantId);
         if (status == StatusType::ALLOCATION_ERROR) return status;
     }
 	return StatusType::SUCCESS;
 }
 
 output_t<int> Olympics::get_strength(int contestantId){
-	if(contestantId < 0) return output_t<int>(StatusType::INVALID_INPUT);
-    Contestant * contestant = *contestants->find(contestantId);
-    if(!contestant) return output_t<int>(StatusType::FAILURE);
+	if(contestantId <= 0) return output_t<int>(StatusType::INVALID_INPUT);
+    Contestant ** contestant_p = contestants->find(contestantId);
+    if(!contestant_p) return output_t<int>(StatusType::FAILURE);
+    Contestant *contestant = *contestant_p;
     return output_t<int>(contestant->getStrength());
 }
 
 output_t<int> Olympics::get_medals(int countryId){
 	if(countryId <= 0) return output_t<int>(StatusType::INVALID_INPUT);
-    Country * country = *countries->find(countryId);
-    if(!country) return output_t<int>(StatusType::FAILURE);
+    Country ** country_p = countries->find(countryId);
+    if(!country_p) return output_t<int>(StatusType::FAILURE);
+    Country *country = *country_p;
     return output_t<int>(country->getMedals());
 }
 
 output_t<int> Olympics::get_team_strength(int teamId){
     if (teamId <= 0) return output_t<int>(StatusType::INVALID_INPUT);
-    Team *team = *teams->find(teamId);
-    if(!team) return output_t<int>(StatusType::FAILURE);
+    Team **team_p = teams->find(teamId);
+    if(!team_p) return output_t<int>(StatusType::FAILURE);
+    Team* team = *team_p;
     return output_t<int>(team->getStrength());
 }
 
 StatusType Olympics::unite_teams(int teamId1,int teamId2){
     if (teamId1 <=0 || teamId2 <=0 || teamId1==teamId2) return StatusType::INVALID_INPUT;
-    Team* team1 = *teams->find(teamId1);
-    Team* team2 = *teams->find(teamId2);
-    if (!team1 || !team2 || team1->getSport() != team2->getSport() || team1->getCountryId() != team2->getCountryId()) return StatusType::FAILURE;
-    Team team2_ = *team2;
+    Team** team1_p = teams->find(teamId1);
+    Team** team2_p = teams->find(teamId2);
+    if(!team1_p || !team2_p) return StatusType::FAILURE;
+    Team *team1 = *team1_p;
+    Team *team2 = *team2_p;
+    if (team1->getSport() != team2->getSport() || team1->getCountryId() != team2->getCountryId()) return StatusType::FAILURE;
+    Team &team2_ = *team2;
     StatusType status = team1->unite(team2_);
     if (status != StatusType::SUCCESS) return status;
-    remove_team(teamId2);
-    return StatusType::SUCCESS;
+    return remove_team(teamId2);
 }
-
 
 
 StatusType Olympics::play_match(int teamId1,int teamId2){
 	if(teamId1 <= 0 || teamId2 <= 0 || teamId1 == teamId2) return StatusType::INVALID_INPUT;
-    Team * team1 = *teams->find(teamId1);
-    Team * team2 = *teams->find(teamId2);
-    if(!team1 || !team2 || team1->getSport() != team2->getSport()) return StatusType::FAILURE;
+    Team** team1_p = teams->find(teamId1);
+    Team** team2_p = teams->find(teamId2);
+    if(!team1_p || !team2_p) return StatusType::FAILURE;
+    Team *team1 = *team1_p;
+    Team *team2 = *team2_p;
+    if(team1->getSport() != team2->getSport()) return StatusType::FAILURE;
     Country* country1 = team1->getCountry(), *country2 = team2->getCountry();
     int score1 = team1->getStrength() + country1->getMedals();
     int score2 = team2->getStrength() + country2->getMedals();
@@ -196,8 +229,10 @@ StatusType Olympics::play_match(int teamId1,int teamId2){
 
 output_t<int> Olympics::austerity_measures(int teamId){
     if(teamId <= 0) return output_t<int>(StatusType::INVALID_INPUT);
-    Team *team = *teams->find(teamId);
-    if(!team) return output_t<int>(StatusType::FAILURE);
+    Team **team_p = teams->find(teamId);
+    if(!team_p) return output_t<int>(StatusType::FAILURE);
+    Team *team = *team_p;
+    if (team->getNumContestants() < 3) return output_t<int>(StatusType::FAILURE);
     int austerity = 0;
     try{
         austerity = team->getAusterity();

@@ -3,7 +3,7 @@
 #define DS_WET_1_AVL_H
 
 #include "node.h"
-#include "../Scripts/wet1util.h"
+#include "wet1util.h"
 #include <cmath>
 #include <iostream>
 #include "pair.h"
@@ -183,8 +183,10 @@ int avl<T, S>::getSize() {
 
 template<typename T, typename S>
 StatusType avl<T, S>::insert(T key, S value) {
-    node<T, S> * newNode = new node<T, S>(key, value);
-    if (!newNode){    //Todo - check if legal
+    node<T, S> * newNode;
+    try {
+        newNode = new node<T, S>(key, value);
+    }catch (std::bad_alloc& err){
         return StatusType::ALLOCATION_ERROR;
     }
     if (!root){
@@ -195,6 +197,7 @@ StatusType avl<T, S>::insert(T key, S value) {
         return StatusType::SUCCESS;
     }
     if(unique && find(key)){
+        delete newNode;
         return StatusType::FAILURE;
     }
     node<T, S> * parent = findAux(key);
@@ -208,13 +211,11 @@ StatusType avl<T, S>::insert(T key, S value) {
         parent->updateHeight();
         parent = parent->getParent();
     }
-//    printTree();
     fixTree(newNode);
 
     size++;
     maxKey = findMax();
     minKey = findMin();
-//    printTree();
     return StatusType::SUCCESS;
 }
 
@@ -319,7 +320,6 @@ template<typename T, typename S>
 void avl<T, S>::fixTree(node<T, S> *start) {
     node<T, S> * cur = start;
     while (cur){
-//        printTree();
         cur->updateHeight();
         int bf = cur->getBf();
 
@@ -364,7 +364,7 @@ StatusType avl<T, S>::remove(T &key) {
     //if toRemove only has one son
     if (!rson && !lson){
         bool isRoot = (toRemove == root);
-        delete toRemove;
+        //delete toRemove;
         if (isRoot){
             root = nullptr;
         }else{

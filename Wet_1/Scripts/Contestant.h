@@ -3,9 +3,8 @@
 #define DS_WET_1_CONTESTANT_H
 
 #include "country.h"
-#include "../Scripts/wet1util.h"
+#include "wet1util.h"
 #include "avl.h"
-#include "Team.h"
 
 class Contestant{
 public:
@@ -21,6 +20,7 @@ public:
     void removeTeam(int teamId);
     int getCountryId();
     int* getTeamIds();
+    void updateTeam(int oldID, int newID);
 
 private:
     int contestantID;
