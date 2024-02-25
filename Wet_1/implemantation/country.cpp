@@ -35,3 +35,7 @@ void Country::addContestant() {
 void Country::removeContestant() {
     contestants--;
 }
+
+bool Country::operator<(const Country &toCompare) const {
+    return true;
+}

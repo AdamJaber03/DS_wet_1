@@ -3,6 +3,27 @@
 
 
 Olympics::Olympics(){
+    try{
+        countries = new avl<int, Country>;
+    }
+    catch (std::bad_alloc &e){
+        throw StatusType::ALLOCATION_ERROR;
+    }
+    try{
+        teams = new avl<int, Team>;
+    }
+    catch (std::bad_alloc &e){
+        delete countries;
+        throw StatusType::ALLOCATION_ERROR;
+    }
+    try{
+        contestants = new avl<int, Contestant>;
+    }
+    catch (std::bad_alloc &e){
+        delete countries;
+        delete teams;
+        throw StatusType::ALLOCATION_ERROR;
+    }
 
 }
 

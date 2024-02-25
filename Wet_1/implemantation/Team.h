@@ -12,13 +12,13 @@ public:
     Team()=default;
     Team(int teamId, Country * country, Sport sport);
     ~Team();
+    bool operator<(const Team &toCompare) const;
     Sport getSport();
     int getID();
     int getNumContestants();
     StatusType addContestant(int id, int strength);
     StatusType removeContestant(int id);
     int getStrength();
-    //int get_austerity();
     int getCountryId();
     Country* getCountry();
     StatusType unite(Team &team2);

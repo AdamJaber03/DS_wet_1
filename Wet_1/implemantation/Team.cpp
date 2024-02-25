@@ -589,7 +589,7 @@ int Team::calculateAusterity(int toRemoveS1, int toRemoveS2, int toRemoveS3) {
         pair<int,int> minStrength = st1->getMin();
         int minId = minStrength.getP2();
         tempKeysSt1[i] = minStrength;
-        tempIdSt1[i] = *s1->find(minId);
+        tempIdSt1[i] = minId;
         s1->remove(minId);
         st1->remove(minStrength);
     }
@@ -597,7 +597,7 @@ int Team::calculateAusterity(int toRemoveS1, int toRemoveS2, int toRemoveS3) {
         pair<int,int> minStrength = st2->getMin();
         int minId = minStrength.getP2();
         tempKeysSt2[i] = minStrength;
-        tempIdSt2[i] = *s2->find(minId);
+        tempIdSt2[i] = minId;
         s2->remove(minId);
         st2->remove(minStrength);
     }
@@ -605,7 +605,7 @@ int Team::calculateAusterity(int toRemoveS1, int toRemoveS2, int toRemoveS3) {
         pair<int,int> minStrength = st3->getMin();
         int minId = minStrength.getP2();
         tempKeysSt3[i] = minStrength;
-        tempIdSt3[i] = *s3->find(minId);
+        tempIdSt3[i] = minId;
         s3->remove(minId);
         st3->remove(minStrength);
     }
@@ -773,4 +773,8 @@ void Team::updateAusterity() {
         throw e;
     }
     austerity = max;
+}
+
+bool Team::operator<(const Team &toCompare) const {
+    return true;
 }

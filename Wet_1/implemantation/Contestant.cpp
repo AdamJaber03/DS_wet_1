@@ -60,3 +60,7 @@ Contestant::Contestant(int contestantID, int countryId, Sport sport, int strengt
 Contestant::~Contestant() {
     country->removeContestant();
 }
+
+bool Contestant::operator<(const Contestant &toCompare) const {
+    return true;
+}

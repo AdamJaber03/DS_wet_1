@@ -11,6 +11,7 @@ class Contestant{
 public:
     Contestant(int contestantID, int countryId, Sport sport, int strength, Country* country);
     ~Contestant();
+    bool operator<(const Contestant &toCompare) const;
     int getID();
     Sport getSport();
     int getStrength();
