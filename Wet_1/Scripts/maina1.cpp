@@ -21,7 +21,6 @@ void print(string cmd, output_t<int> res);
 
 int main()
 {
-	
     int d1, d2, d3, g1;
     string b1;
     bool b;

@@ -13,7 +13,7 @@ class avl{
 public:
     avl(): root(nullptr), size(0), maxKey(T()), minKey(T()), unique(true) {};
     virtual ~avl();
-    StatusType insert(T & key, S &value);
+    StatusType insert(T key, S value);
     StatusType remove(T & key);
     S * find(T & key);
     void changeUnique();
@@ -24,6 +24,7 @@ public:
     void createEmpty(int size);
     void fillEmpty(pair<T, S> *list);
     void fillByValue(pair<T, S> *list, const S& min, const S& max);
+    node<T, S>* getRoot();
 
 private:
     node<T, S> * root;
@@ -50,6 +51,11 @@ private:
     void fillEmptyAux(node<T, S> *cur, pair<T, S> *list, int &i);
     void fillByValueAux(pair<T, S>* list, const S &min, const S &max, node<T, S>* cur, int &i);
 };
+
+template<typename T, typename S>
+node<T, S> *avl<T, S>::getRoot() {
+    return root;
+}
 
 template<typename T, typename S>
 void avl<T, S>::fillByValueAux(pair<T, S> *list, const S &min, const S &max, node<T, S> *cur, int &i) {
@@ -176,7 +182,7 @@ int avl<T, S>::getSize() {
 
 
 template<typename T, typename S>
-StatusType avl<T, S>::insert(T &key, S &value) {
+StatusType avl<T, S>::insert(T key, S value) {
     node<T, S> * newNode = new node<T, S>(key, value);
     if (!newNode){    //Todo - check if legal
         return StatusType::ALLOCATION_ERROR;

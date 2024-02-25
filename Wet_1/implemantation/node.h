@@ -2,7 +2,8 @@
 #ifndef DS_WET_1_NODE_H
 #define DS_WET_1_NODE_H
 
-#include <cmath>
+
+#include <ntdef.h>
 
 template <typename T, typename S>
 class node{
@@ -59,15 +60,11 @@ void node<T, S>::setLeft(node *left) {
     this->left = left;
 }
 
-int max(int num1, int num2){
-    return num1 > num2 ? num1: num2;
-}
-
 template<typename T, typename S>
 void node<T, S>::updateHeight() {
     int lheight = left ? left->height: -1;
     int rheight = right? right->height: -1;
-    height = max(lheight, rheight) + 1;
+    height = (lheight > rheight ? lheight: rheight) + 1;
 }
 
 template<typename T, typename S>

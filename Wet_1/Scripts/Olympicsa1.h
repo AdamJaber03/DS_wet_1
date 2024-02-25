@@ -25,9 +25,12 @@
 
 class Olympics {
 private:
-	avl<int, Country> *countries;
-    avl<int, Team> *teams;
-    avl<int, Contestant>  *contestants;
+	avl<int, Country*> *countries;
+    avl<int, Team*> *teams;
+    avl<int, Contestant*>  *contestants;
+
+    template<class T>
+    void deleteAux(node<int, T*>* cur);
 
 	
 public:
