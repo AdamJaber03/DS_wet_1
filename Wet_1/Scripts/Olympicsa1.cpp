@@ -55,7 +55,9 @@ StatusType Olympics::remove_country(int countryId){
 	if(countryId <= 0){
         return StatusType::INVALID_INPUT;
     }
-    Country * toRemove = *countries->find(countryId);
+    Country ** toRemove_p = countries->find(countryId);
+    if (!toRemove_p) return StatusType::FAILURE;
+    Country* toRemove = *toRemove_p;
     if(toRemove->getTeams() != 0 || toRemove->getContestants() != 0){
         return StatusType::FAILURE;
     }
