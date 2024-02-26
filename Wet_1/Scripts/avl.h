@@ -105,6 +105,7 @@ void avl<T, S>::removeTail(int i) {
 template<typename T, typename S>
 void avl<T, S>::createEmpty(int treeSize) {
     if (root) return;
+    if (!treeSize) return;
     int height = ceil(log2(treeSize+1)) - 1;
     root = new node<T, S>();
     createEmptyAux(root, height);
