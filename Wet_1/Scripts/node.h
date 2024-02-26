@@ -2,8 +2,6 @@
 #ifndef DS_WET_1_NODE_H
 #define DS_WET_1_NODE_H
 
-#include <iostream>
-
 template <typename T, typename S>
 class node{
 public:

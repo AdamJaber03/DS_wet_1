@@ -351,7 +351,8 @@ StatusType avl<T, S>::remove(T &key) {
     node<T, S> * toRemove = nullptr;
     node<T, S> * startfix = nullptr;
     if (!parent){
-        if (!root) return StatusType::FAILURE;  //TODO - fix
+        //if doesnt exist return failure
+        if (!root) return StatusType::FAILURE;
         toRemove = root;
     }
     else if (!parent->getLeft() && !parent->getRight()){
@@ -364,7 +365,6 @@ StatusType avl<T, S>::remove(T &key) {
     //if toRemove only has one son
     if (!rson && !lson){
         bool isRoot = (toRemove == root);
-        //delete toRemove;
         if (isRoot){
             root = nullptr;
         }else{
@@ -376,6 +376,7 @@ StatusType avl<T, S>::remove(T &key) {
             }
         }
         startfix = parent;
+        delete toRemove;
     }
     else if ((rson && !lson) || (!rson && lson)){
         delete toRemove;

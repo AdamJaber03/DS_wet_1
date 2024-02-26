@@ -46,7 +46,9 @@ StatusType Olympics::add_country(int countryId, int medals){
     }catch (std::bad_alloc& err){
         return StatusType::ALLOCATION_ERROR;
     }
-    return countries->insert(countryId, country);
+    StatusType status = countries->insert(countryId, country);
+    if(status != StatusType::SUCCESS) delete country;
+    return status;
 }
 	
 StatusType Olympics::remove_country(int countryId){
@@ -112,8 +114,11 @@ StatusType Olympics::remove_contestant(int contestantId){
     Contestant ** toRemove_p = contestants->find(contestantId);
     if(!toRemove_p) return StatusType::FAILURE;
     Contestant * toRemove = *toRemove_p;
-    if(toRemove->getNumTeams() > 0) return StatusType::FAILURE;    //why??????
-    return contestants->remove(contestantId);
+    if(toRemove->getNumTeams() > 0) return StatusType::FAILURE;
+    StatusType status = contestants->remove(contestantId);
+    if (status != StatusType::SUCCESS) return status;
+    delete toRemove;
+    return StatusType::SUCCESS;
 }
 
 StatusType Olympics::add_contestant_to_team(int teamId,int contestantId){
@@ -126,7 +131,6 @@ StatusType Olympics::add_contestant_to_team(int teamId,int contestantId){
     if(team->getSport() != contestant->getSport() || team->getCountryId() != contestant->getCountryId() || contestant->getNumTeams() >= 3) return StatusType::FAILURE;
     int strength = contestant->getStrength();
     StatusType status = team->addContestant(contestantId, strength, contestant);
-    std::cout << "l4" << std::endl;
     if (status != StatusType::SUCCESS) return status;
     contestant->addTeam(teamId);
     return StatusType::SUCCESS;

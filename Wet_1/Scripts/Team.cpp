@@ -641,7 +641,6 @@ int Team::calculateAusterity(int toRemoveS1, int toRemoveS2, int toRemoveS3) {
 }
 
 void Team::updateAusterity() {
-    std::cout << "1324" << std::endl;
     int max = 0, trial = 0;
     if(numContestants % 3 != 0){
         austerity = 0;
