@@ -85,12 +85,11 @@ void avl<T, S>::removeTailAux(int &i, node<T, S> *cur) {
     node<T, S> * left = cur->getLeft(), *right = cur->getRight();
     removeTailAux(i, right);
 
-    if (!left && !right){
-        bool pside = cur->getKey() < cur->getParent()->getKey();
-        if (pside){
-            cur->getParent()->setLeft(nullptr);
-        }else{
+    if (!cur->getLeft() && !cur->getRight()){
+        if (cur->getParent()->getRight()){
             cur->getParent()->setRight(nullptr);
+        }else{
+            cur->getParent()->setLeft(nullptr);
         }
         delete cur;
         i--;

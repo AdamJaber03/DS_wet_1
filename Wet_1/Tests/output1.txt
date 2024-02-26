@@ -1,0 +1,1143 @@
+add_country: SUCCESS
+add_team: SUCCESS
+add_team: SUCCESS
+add_team: SUCCESS
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: FAILURE
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: FAILURE
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: FAILURE
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: FAILURE
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: FAILURE
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: FAILURE
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 24
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 30
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 36
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 78
+get_team_strength: SUCCESS, 60
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 84
+get_team_strength: SUCCESS, 66
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 90
+get_team_strength: SUCCESS, 72
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 114
+get_team_strength: SUCCESS, 96
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 120
+get_team_strength: SUCCESS, 102
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 126
+get_team_strength: SUCCESS, 108
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 150
+get_team_strength: SUCCESS, 132
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 156
+get_team_strength: SUCCESS, 138
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 162
+get_team_strength: SUCCESS, 144
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 186
+get_team_strength: SUCCESS, 168
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 192
+get_team_strength: SUCCESS, 174
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 198
+get_team_strength: SUCCESS, 180
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 222
+get_team_strength: SUCCESS, 204
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 228
+get_team_strength: SUCCESS, 210
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 234
+get_team_strength: SUCCESS, 216
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 258
+get_team_strength: SUCCESS, 240
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 264
+get_team_strength: SUCCESS, 246
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 270
+get_team_strength: SUCCESS, 252
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 294
+get_team_strength: SUCCESS, 276
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 300
+get_team_strength: SUCCESS, 282
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 306
+get_team_strength: SUCCESS, 288
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 330
+get_team_strength: SUCCESS, 312
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 336
+get_team_strength: SUCCESS, 318
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 342
+get_team_strength: SUCCESS, 324
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 366
+get_team_strength: SUCCESS, 348
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 372
+get_team_strength: SUCCESS, 354
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 378
+get_team_strength: SUCCESS, 360
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 402
+get_team_strength: SUCCESS, 384
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 408
+get_team_strength: SUCCESS, 390
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 414
+get_team_strength: SUCCESS, 396
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 438
+get_team_strength: SUCCESS, 420
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 444
+get_team_strength: SUCCESS, 426
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 450
+get_team_strength: SUCCESS, 432
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 474
+get_team_strength: SUCCESS, 456
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 480
+get_team_strength: SUCCESS, 462
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 486
+get_team_strength: SUCCESS, 468
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 510
+get_team_strength: SUCCESS, 492
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 516
+get_team_strength: SUCCESS, 498
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 522
+get_team_strength: SUCCESS, 504
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 546
+get_team_strength: SUCCESS, 528
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 552
+get_team_strength: SUCCESS, 534
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 558
+get_team_strength: SUCCESS, 540
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 582
+get_team_strength: SUCCESS, 564
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 588
+get_team_strength: SUCCESS, 570
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 594
+get_team_strength: SUCCESS, 576
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 618
+get_team_strength: SUCCESS, 600
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 624
+get_team_strength: SUCCESS, 606
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 630
+get_team_strength: SUCCESS, 612
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 654
+get_team_strength: SUCCESS, 636
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 660
+get_team_strength: SUCCESS, 642
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 666
+get_team_strength: SUCCESS, 648
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 690
+get_team_strength: SUCCESS, 672
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 696
+get_team_strength: SUCCESS, 678
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 702
+get_team_strength: SUCCESS, 684
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 726
+get_team_strength: SUCCESS, 708
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 732
+get_team_strength: SUCCESS, 714
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 738
+get_team_strength: SUCCESS, 720
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 762
+get_team_strength: SUCCESS, 744
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 768
+get_team_strength: SUCCESS, 750
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 774
+get_team_strength: SUCCESS, 756
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 798
+get_team_strength: SUCCESS, 780
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 804
+get_team_strength: SUCCESS, 786
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 810
+get_team_strength: SUCCESS, 792
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 834
+get_team_strength: SUCCESS, 816
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 840
+get_team_strength: SUCCESS, 822
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 846
+get_team_strength: SUCCESS, 828
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 870
+get_team_strength: SUCCESS, 852
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 876
+get_team_strength: SUCCESS, 858
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 882
+get_team_strength: SUCCESS, 864
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 906
+get_team_strength: SUCCESS, 888
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 912
+get_team_strength: SUCCESS, 894
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 918
+get_team_strength: SUCCESS, 900
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 942
+get_team_strength: SUCCESS, 924
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 948
+get_team_strength: SUCCESS, 930
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 954
+get_team_strength: SUCCESS, 936
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 978
+get_team_strength: SUCCESS, 960
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 984
+get_team_strength: SUCCESS, 966
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 990
+get_team_strength: SUCCESS, 972
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 1014
+get_team_strength: SUCCESS, 996
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 1020
+get_team_strength: SUCCESS, 1002
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 1026
+get_team_strength: SUCCESS, 1008
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 1050
+get_team_strength: SUCCESS, 1032
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 1056
+get_team_strength: SUCCESS, 1038
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 1062
+get_team_strength: SUCCESS, 1044
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 0
+get_team_strength: SUCCESS, 0
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 1086
+get_team_strength: SUCCESS, 1068
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 1092
+get_team_strength: SUCCESS, 1074
+add_contestant: SUCCESS
+add_contestant_to_team: SUCCESS
+austerity_measures: SUCCESS, 1098
+get_team_strength: SUCCESS, 1080
+get_medals: SUCCESS, 2
+get_medals: SUCCESS, 2
+play_match: SUCCESS
+get_medals: SUCCESS, 3
+get_medals: SUCCESS, 3
+get_medals: SUCCESS, 3
+get_medals: FAILURE
+play_match: SUCCESS
+get_medals: SUCCESS, 4
+get_medals: FAILURE
+get_medals: SUCCESS, 4
+get_medals: FAILURE
+play_match: FAILURE
+get_medals: SUCCESS, 4
+get_medals: FAILURE
+get_medals: FAILURE
+get_medals: FAILURE
+play_match: SUCCESS
+get_medals: FAILURE
+get_medals: FAILURE
+get_medals: FAILURE
+get_medals: FAILURE
+play_match: FAILURE
+get_medals: FAILURE
+get_medals: FAILURE
+get_medals: FAILURE
+get_medals: FAILURE
+play_match: FAILURE
+get_medals: FAILURE
+get_medals: FAILURE
+update_contestant_strength: FAILURE
+update_contestant_strength: SUCCESS
+update_contestant_strength: FAILURE
+update_contestant_strength: SUCCESS
+update_contestant_strength: FAILURE
+update_contestant_strength: SUCCESS
+update_contestant_strength: FAILURE
+update_contestant_strength: SUCCESS
+update_contestant_strength: FAILURE
+update_contestant_strength: SUCCESS
+update_contestant_strength: FAILURE
+update_contestant_strength: SUCCESS
+update_contestant_strength: FAILURE
+update_contestant_strength: SUCCESS
+update_contestant_strength: FAILURE
+update_contestant_strength: SUCCESS
+update_contestant_strength: FAILURE
+update_contestant_strength: SUCCESS
+get_team_strength: SUCCESS, 7530
+get_team_strength: SUCCESS, 1068
+get_team_strength: SUCCESS, 4202
+unite_teams: SUCCESS
+unite_teams: FAILURE
+austerity_measures: SUCCESS, 7530
+get_team_strength: SUCCESS, 7530
+austerity_measures: FAILURE
+get_team_strength: FAILURE
+austerity_measures: SUCCESS, 4208
+get_team_strength: SUCCESS, 4202
