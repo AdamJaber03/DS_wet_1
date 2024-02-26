@@ -372,6 +372,7 @@ StatusType Team::unite(Team &team2) {
     delete s1;
     delete s2;
     delete s3;
+    delete[] merged;
     s1 = news1;
     s2 = news2;
     s3 = news3;
@@ -544,6 +545,7 @@ StatusType Team::unite(Team &team2) {
     delete st1;
     delete st2;
     delete st3;
+    delete[] mergedst;
     st1 = newst1;
     st2 = newst2;
     st3 = newst3;
@@ -586,11 +588,9 @@ int Team::getAusterity() {
 
 int Team::calculateAusterity(int toRemoveS1, int toRemoveS2, int toRemoveS3) {
     pair<int, int> tempKeysSt1[3], tempKeysSt2[3], tempKeysSt3[3];
-    std::cout << "10" << std::endl;
     int tempIdSt1[3], tempIdSt2[3], tempIdSt3[3];
     Contestant* tempContestents1[3], *tempContestents2[3], *tempContestents3[3];
     int newStrength = this->getStrength();
-    std::cout << "11" << std::endl;
     for(int i=0; i < toRemoveS1; i++){
         pair<int,int> minStrength = st1->getMin();
         int minId = minStrength.getP2();
@@ -621,11 +621,9 @@ int Team::calculateAusterity(int toRemoveS1, int toRemoveS2, int toRemoveS3) {
         st3->remove(minStrength);
         numContestants--;
     }
-    std::cout << "11" << std::endl;
     balanceTeam();
     balanceTeam();
     balanceTeam();
-    std::cout << "12" << std::endl;
     newStrength = this->getStrength();
     for(int i=0; i < toRemoveS1; i++){
         int strength = tempKeysSt1[i].getP1();
@@ -639,7 +637,6 @@ int Team::calculateAusterity(int toRemoveS1, int toRemoveS2, int toRemoveS3) {
         int strength = tempKeysSt3[i].getP1();
         addContestant(tempIdSt3[i], strength, tempContestents3[i], true);
     }
-    std::cout << "13" << std::endl;
     return newStrength;
 }
 
@@ -667,7 +664,7 @@ void Team::updateAusterity() {
         if(trial > max) max = trial;
     }
     if(numContestants > 6){
-        trial = calculateAusterity(3,0,0);
+        trial = calculateAusterity(3,0,0);  //TODO - this ruins the tree!!!!!!
         if(trial > max) max = trial;
         trial = calculateAusterity(0,3,0);
         if(trial > max) max = trial;

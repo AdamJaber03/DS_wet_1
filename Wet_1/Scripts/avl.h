@@ -46,7 +46,7 @@ private:
     void getInorderAux(pair<T, S> *list, int &i, node<T, S> *cur);
     void createEmptyAux(node<T, S> *parent, int height);
     void removeTail(int i);
-    void removeTailAux(int i, node<T, S> * cur);
+    void removeTailAux(int &i, node<T, S> * cur);
 
     void fillEmptyAux(node<T, S> *cur, pair<T, S> *list, int &i);
     void fillByValueAux(pair<T, S>* list, const S &min, const S &max, node<T, S>* cur, int &i);
@@ -80,7 +80,7 @@ void avl<T, S>::fillByValue(pair<T, S> *list, const S& min, const S& max) {
 }
 
 template<typename T, typename S>
-void avl<T, S>::removeTailAux(int i, node<T, S> *cur) {
+void avl<T, S>::removeTailAux(int &i, node<T, S> *cur) {
     if (!cur || !i) return;
     node<T, S> * left = cur->getLeft(), *right = cur->getRight();
     removeTailAux(i, right);
@@ -404,7 +404,7 @@ StatusType avl<T, S>::remove(T &key) {
         startfix = curSmall->getParent();
         T tempKey = curSmall->getKey();
         S tempValue = curSmall->getValue();
-        node<T, S> * smlParent = curSmall->getParent(), *smlrSon = curSmall->getLeft();
+        node<T, S> * smlParent = curSmall->getParent(), *smlrSon = curSmall->getRight();
         delete curSmall;
         toRemove->setKey(tempKey);
         toRemove->setValue(tempValue);

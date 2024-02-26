@@ -25,6 +25,9 @@ void Contestant::setStrength(int updateStrength) {
 
 void Contestant::addTeam(int teamId) {
     numTeams++;
+    for (int i = 0; i < 3; ++i) {
+        if (teamIds[i] == teamId) return;
+    }
     for (int i = 0; i < 3; i++){
         if (!teamIds[i]){
             teamIds[i] = teamId;
@@ -66,7 +69,18 @@ bool Contestant::operator<(const Contestant &toCompare) const {
 }
 
 void Contestant::updateTeam(int oldID, int newID) {
+    bool dup= false;
     for (int i = 0; i < 3; ++i) {
-        if (teamIds[i] == oldID) teamIds[i] = newID;
+        if (teamIds[i] == newID) dup = true;
+    }
+    for (int i = 0; i < 3; ++i) {
+        if (teamIds[i] == oldID){
+            if (dup){
+                teamIds[i] = 0;
+                numTeams--;
+            }else{
+                teamIds[i] = newID;
+            }
+        }
     }
 }
