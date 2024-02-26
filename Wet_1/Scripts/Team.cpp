@@ -554,6 +554,7 @@ StatusType Team::unite(Team &team2) {
     updateTeamIds(s1, team2.getID());
     updateTeamIds(s2, team2.getID());
     updateTeamIds(s3, team2.getID());
+    updateAusterity();
     return StatusType::SUCCESS;
 }
 
